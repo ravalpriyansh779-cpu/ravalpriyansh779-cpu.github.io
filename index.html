@@ -4,546 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Priyansh Raval | Full-Stack Engineer</title>
-    <meta name="description" content="Software Engineer building scalable backend and frontend applications. Specializing in React, TypeScript, Python, and PostgreSQL.">
+    <meta name="description" content="Full-Stack Engineer who owns features from whiteboard to production. React, TypeScript, Python, FastAPI, PostgreSQL.">
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #00ACC1;
-            --primary-dark: #0097A7;
-            --bg: #0D1117;
-            --bg-secondary: #161B22;
-            --text: #E6EDF3;
-            --text-secondary: #8B949E;
-            --border: #30363D;
-            --success: #3FB950;
-            --warning: #D29922;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(13, 17, 23, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .hacker-toggle {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.875rem;
-            transition: all 0.3s;
-        }
-
-        .hacker-toggle:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 8rem 0 4rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-content h1 span {
-            color: var(--primary);
-        }
-
-        .hero-content p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        .trust-badges {
-            margin-top: 2rem;
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            background: var(--bg-secondary);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            border: 1px solid var(--border);
-        }
-
-        .hero-visual {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            aspect-ratio: 16/9;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-        }
-
-        /* Projects Section */
-        .projects {
-            padding: 4rem 0;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s;
-        }
-
-        .project-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-        }
-
-        .project-header {
-            margin-bottom: 1.5rem;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-tech {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-
-        .tech-tag {
-            background: var(--bg);
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            color: var(--primary);
-            border: 1px solid var(--border);
-        }
-
-        .project-description {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .project-links a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .project-links a:hover {
-            text-decoration: underline;
-        }
-
-        /* Experience Section */
-        .experience {
-            padding: 4rem 0;
-            background: var(--bg-secondary);
-        }
-
-        .experience-item {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .experience-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .experience-company {
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .experience-date {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-
-        .experience-metrics {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .metric-card {
-            background: var(--bg);
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .metric-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .metric-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin-top: 0.25rem;
-        }
-
-        .experience-description {
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        /* Skills Section */
-        .skills {
-            padding: 4rem 0;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category {
-            background: var(--bg-secondary);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        .skill-category h3 {
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .skill-tag {
-            background: var(--bg);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            border: 1px solid var(--border);
-        }
-
-        /* Footer */
-        footer {
-            padding: 3rem 0;
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero {
-                grid-template-columns: 1fr;
-                padding: 6rem 0 3rem;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-        }
-
-        /* Terminal Easter Egg */
-        .terminal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            z-index: 9999;
-            padding: 2rem;
-            overflow-y: auto;
-        }
-
-        .terminal-overlay.active {
-            display: block;
-        }
-
-        .terminal {
-            font-family: 'Courier New', monospace;
-            color: #0f0;
-            line-height: 1.8;
-        }
-
-        .terminal-line {
-            margin-bottom: 0.5rem;
-        }
-
-        .close-terminal {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background: #333;
-            color: #fff;
-            border: none;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            z-index: 10000;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Navigation -->
     <nav>
-        <div class="container">
+        <div class="container nav-inner">
             <div class="logo">Priyansh Raval</div>
-            <div class="nav-links">
+            <div class="nav-links" id="navLinks">
                 <a href="#projects">Projects</a>
                 <a href="#experience">Experience</a>
                 <a href="#skills">Skills</a>
-                <a href="https://github.com/ravalpriyansh779-cpu" target="_blank">GitHub</a>
+                <a href="https://github.com/ravalpriyansh779-cpu" target="_blank" rel="noopener">GitHub</a>
                 <button class="hacker-toggle" onclick="toggleTerminal()">⌘ Hacker Mode</button>
             </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
-        <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+        <div class="container hero-grid">
             <div class="hero-content">
+                <p class="eyebrow">Available for Software Engineer roles</p>
                 <h1>Priyansh Raval<br><span>Full-Stack Engineer</span></h1>
-                <p>Building scalable backend and frontend applications from whiteboard to production. Specializing in React, TypeScript, Python, and PostgreSQL.</p>
+                <p class="hero-sub">
+                    I own features from whiteboard to production — real-time systems, multi-tenant RAG, and secure AI-assisted tools.
+                </p>
                 <div class="cta-buttons">
-                    <a href="#projects" class="btn btn-primary">▶ View Projects</a>
-                    <a href="https://github.com/ravalpriyansh779-cpu" target="_blank" class="btn btn-secondary">GitHub</a>
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="https://github.com/ravalpriyansh779-cpu" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
                     <a href="mailto:23bit084@sot.pdpu.ac.in" class="btn btn-secondary">Contact</a>
                 </div>
                 <div class="trust-badges">
-                    <span class="badge">🏢 SDE Intern @ SITESEW</span>
-                    <span class="badge">📄 Published @ ICAWTM-26</span>
+                    <span class="badge">SDE Intern @ SITESEW</span>
+                    <span class="badge">40% latency ↓ · 77% faster deploys</span>
+                    <span class="badge">Published @ ICAWTM-26</span>
                 </div>
             </div>
             <div class="hero-visual">
-                <div>🚀 Real-time Collaboration Demo</div>
+                <div class="terminal-preview">
+                    <div class="terminal-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <div class="terminal-body">
+                        <p><span class="prompt">$</span> whoami</p>
+                        <p>Priyansh — owns features end-to-end</p>
+                        <p><span class="prompt">$</span> cat impact.txt</p>
+                        <p>→ 40% API latency reduction</p>
+                        <p>→ 45min → 10min deploys</p>
+                        <p>→ Multi-tenant RAG + real RBAC for AI</p>
+                        <p><span class="prompt">$</span> <span class="cursor">_</span></p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Projects -->
     <section class="projects" id="projects">
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
             <div class="project-grid">
+
                 <!-- PulseBoard -->
-                <div class="project-card">
+                <article class="project-card">
                     <div class="project-header">
                         <h3 class="project-title">PulseBoard</h3>
                         <div class="project-tech">
                             <span class="tech-tag">React</span>
                             <span class="tech-tag">TypeScript</span>
-                            <span class="tech-tag">WebSockets</span>
+                            <span class="tech-tag">Socket.IO</span>
                             <span class="tech-tag">PostgreSQL</span>
                         </div>
                     </div>
                     <p class="project-description">
-                        Real-time collaborative Kanban board with live sync across clients. Built with React + TypeScript frontend, Node/Express backend, and Socket.IO for sub-second synchronization.
+                        Real-time collaborative Kanban with sub-second live sync. Optimistic UI + last-write-wins enforced by Postgres. JWT auth, Socket.IO rooms, native drag-and-drop.
                     </p>
+                    <p class="project-owned"><strong>I owned:</strong> real-time protocol, optimistic updates, schema, auth.</p>
                     <div class="project-links">
-                        <a href="https://github.com/ravalpriyansh779-cpu/pulseboard" target="_blank">📂 GitHub →</a>
-                        <a href="#" target="_blank">🔗 Live Demo →</a>
+                        <a href="https://github.com/ravalpriyansh779-cpu/pulseboard" target="_blank" rel="noopener">GitHub →</a>
                     </div>
-                </div>
+                </article>
 
                 <!-- TaskForge -->
-                <div class="project-card">
+                <article class="project-card">
                     <div class="project-header">
                         <h3 class="project-title">TaskForge</h3>
                         <div class="project-tech">
                             <span class="tech-tag">React</span>
-                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">RBAC</span>
                             <span class="tech-tag">Docker</span>
-                            <span class="tech-tag">JWT</span>
                         </div>
                     </div>
                     <p class="project-description">
-                        Secure AI operations dashboard with RBAC, JWT authentication, route-level authorization, and audit logging. Containerized with Docker for consistent deployment.
+                        Secure AI ops dashboard where the AI assistant is bound by the same RBAC rules as humans — no backdoor. Permission checks + audit log for every action.
                     </p>
+                    <p class="project-owned"><strong>I owned:</strong> permission matrix, audit logging, Docker setup, AI tool boundaries.</p>
                     <div class="project-links">
-                        <a href="https://github.com/ravalpriyansh779-cpu/TaskForge-" target="_blank">📂 GitHub →</a>
-                        <a href="#" target="_blank">🔗 Live Demo →</a>
+                        <a href="https://github.com/ravalpriyansh779-cpu/TaskForge-" target="_blank" rel="noopener">GitHub →</a>
+                        <a href="https://task-forge-two-sigma.vercel.app" target="_blank" rel="noopener">Live Demo →</a>
                     </div>
-                </div>
+                </article>
 
                 <!-- CampusLens -->
-                <div class="project-card">
+                <article class="project-card">
                     <div class="project-header">
                         <h3 class="project-title">CampusLens</h3>
                         <div class="project-tech">
@@ -554,28 +128,29 @@
                         </div>
                     </div>
                     <p class="project-description">
-                        Multi-tenant RAG platform with per-tenant vector isolation using Pinecone namespaces. Citation-grounded retrieval reduces LLM hallucinations with source-constrained prompts.
+                        Multi-tenant RAG platform with hard isolation via Pinecone namespaces. JWT carries tenant_id — no client-side trust. Citation-grounded answers.
                     </p>
+                    <p class="project-owned"><strong>I owned:</strong> tenant isolation design, ingestion pipeline, FastAPI + React stack.</p>
                     <div class="project-links">
-                        <a href="https://github.com/ravalpriyansh779-cpu/CampusLens" target="_blank">📂 GitHub →</a>
-                        <a href="#" target="_blank">🔗 Live Demo →</a>
+                        <a href="https://github.com/ravalpriyansh779-cpu/CampusLens" target="_blank" rel="noopener">GitHub →</a>
                     </div>
-                </div>
+                </article>
+
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
+    <!-- Experience -->
     <section class="experience" id="experience">
         <div class="container">
             <h2 class="section-title">Experience</h2>
             <div class="experience-item">
                 <div class="experience-header">
                     <div>
-                        <div class="experience-company">SITESEW | IT Product & Services</div>
+                        <div class="experience-company">SITESEW · IT Product & Services</div>
                         <div class="experience-title">Software Developer Intern</div>
                     </div>
-                    <div class="experience-date">May 2026 – Jul 2026</div>
+                    <div class="experience-date">May 2025 – Jul 2025</div>
                 </div>
                 <div class="experience-metrics">
                     <div class="metric-card">
@@ -591,14 +166,14 @@
                         <div class="metric-label">Minutes per Deploy</div>
                     </div>
                 </div>
-                <div class="experience-description">
-                    Designed and built scalable RESTful APIs using Python (FastAPI) and PostgreSQL. Optimized database performance through advanced indexing and connection pooling. Championed automated CI/CD pipelines via GitHub Actions, reducing manual deployment time by 77% in a dynamic, fast-paced environment.
-                </div>
+                <p class="experience-description">
+                    Designed and shipped scalable REST APIs with Python (FastAPI) and PostgreSQL. Optimized indexing and connection pooling. Built automated CI/CD with GitHub Actions, cutting manual deployment time by 77%. Owned features end-to-end in a fast-paced product environment.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Skills -->
     <section class="skills" id="skills">
         <div class="container">
             <h2 class="section-title">Technical Skills</h2>
@@ -606,8 +181,8 @@
                 <div class="skill-category">
                     <h3>Languages</h3>
                     <div class="skill-list">
-                        <span class="skill-tag">JavaScript</span>
                         <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">JavaScript</span>
                         <span class="skill-tag">Python</span>
                         <span class="skill-tag">SQL</span>
                     </div>
@@ -615,8 +190,8 @@
                 <div class="skill-category">
                     <h3>Frontend</h3>
                     <div class="skill-list">
-                        <span class="skill-tag">React.js</span>
-                        <span class="skill-tag">UI Components</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Vite</span>
                         <span class="skill-tag">HTML/CSS</span>
                     </div>
                 </div>
@@ -650,7 +225,7 @@
                     <h3>Practices</h3>
                     <div class="skill-list">
                         <span class="skill-tag">System Design</span>
-                        <span class="skill-tag">Agile/Scrum</span>
+                        <span class="skill-tag">RBAC</span>
                         <span class="skill-tag">End-to-End Ownership</span>
                     </div>
                 </div>
@@ -662,13 +237,11 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="https://github.com/ravalpriyansh779-cpu" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/priyansh-raval-3a98b7366/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/ravalpriyansh779-cpu" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://www.linkedin.com/in/priyansh-raval-3a98b7366/" target="_blank" rel="noopener">LinkedIn</a>
                 <a href="mailto:23bit084@sot.pdpu.ac.in">Email</a>
             </div>
-            <p style="color: var(--text-secondary); margin-top: 1rem;">
-                Built with React + TypeScript + Tailwind CSS | © 2026 Priyansh Raval
-            </p>
+            <p class="footer-copy">© 2026 Priyansh Raval · Built for impact</p>
         </div>
     </footer>
 
@@ -677,40 +250,23 @@
         <button class="close-terminal" onclick="toggleTerminal()">✕ Exit</button>
         <div class="terminal">
             <div class="terminal-line">$ whoami</div>
-            <div class="terminal-line">Priyansh Raval - Product-Minded Software Engineer</div>
+            <div class="terminal-line">Priyansh Raval — Product-minded Software Engineer</div>
             <div class="terminal-line"></div>
             <div class="terminal-line">$ cat skills.txt</div>
-            <div class="terminal-line">JavaScript, TypeScript, Python, React.js, Node.js, FastAPI</div>
-            <div class="terminal-line">REST APIs, WebSockets, PostgreSQL, Pinecone, Docker, CI/CD</div>
+            <div class="terminal-line">TypeScript · Python · React · FastAPI · PostgreSQL · Socket.IO · Docker</div>
             <div class="terminal-line"></div>
             <div class="terminal-line">$ ls projects/</div>
-            <div class="terminal-line">PulseBoard/    - Real-time Kanban with WebSockets</div>
-            <div class="terminal-line">TaskForge/     - Secure AI Ops Dashboard with RBAC</div>
-            <div class="terminal-line">CampusLens/    - Multi-tenant RAG with Pinecone</div>
+            <div class="terminal-line">PulseBoard/   — Real-time Kanban + WebSockets</div>
+            <div class="terminal-line">TaskForge/    — AI dashboard with real RBAC</div>
+            <div class="terminal-line">CampusLens/   — Multi-tenant RAG + Pinecone</div>
             <div class="terminal-line"></div>
             <div class="terminal-line">$ echo $STATUS</div>
             <div class="terminal-line">Ready for deployment. Seeking SWE roles.</div>
             <div class="terminal-line"></div>
-            <div class="terminal-line">$ _</div>
+            <div class="terminal-line">$ <span class="cursor">_</span></div>
         </div>
     </div>
 
-    <script>
-        function toggleTerminal() {
-            const overlay = document.getElementById('terminalOverlay');
-            overlay.classList.toggle('active');
-        }
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
