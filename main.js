@@ -4,13 +4,7 @@
     // ==========================================================================
     // CONSTANTS & STATE
     // ==========================================================================
-    const STATES = {
-        BOOT: 'BOOT',
-        BROWSE: 'BROWSE',
-        CASE_FOCUS: 'CASE_FOCUS',
-        CONTACT: 'CONTACT'
-    };
-
+    const STATES = { BOOT: 'BOOT', BROWSE: 'BROWSE', CASE_FOCUS: 'CASE_FOCUS', CONTACT: 'CONTACT' };
     let currentState = STATES.BOOT;
 
     // ==========================================================================
@@ -18,15 +12,8 @@
     // ==========================================================================
     const eventBus = {
         events: {},
-        on(event, callback) {
-            if (!this.events[event]) this.events[event] = [];
-            this.events[event].push(callback);
-        },
-        emit(event, data) {
-            if (this.events[event]) {
-                this.events[event].forEach(callback => callback(data));
-            }
-        }
+        on(event, callback) { if (!this.events[event]) this.events[event] = []; this.events[event].push(callback); },
+        emit(event, data) { if (this.events[event]) { this.events[event].forEach(callback => callback(data)); } }
     };
 
     // ==========================================================================
@@ -45,21 +32,11 @@
     ];
 
     function typeBootSequence() {
-        if (prefersReducedMotion) {
-            endBootSequence();
-            return;
-        }
-
-        let lineIndex = 0;
-        let charIndex = 0;
-        let currentText = '';
+        if (prefersReducedMotion) { endBootSequence(); return; }
+        let lineIndex = 0; let charIndex = 0; let currentText = '';
 
         function typeChar() {
-            if (lineIndex >= bootLines.length) {
-                setTimeout(endBootSequence, 500);
-                return;
-            }
-
+            if (lineIndex >= bootLines.length) { setTimeout(endBootSequence, 500); return; }
             const line = bootLines[lineIndex];
             if (charIndex < line.length) {
                 currentText += line[charIndex];
@@ -69,12 +46,10 @@
             } else {
                 currentText += '\n';
                 bootLog.textContent = currentText + '█';
-                lineIndex++;
-                charIndex = 0;
+                lineIndex++; charIndex = 0;
                 setTimeout(typeChar, 400);
             }
         }
-
         typeChar();
     }
 
@@ -84,22 +59,13 @@
         eventBus.emit('stateChange', currentState);
     }
 
-    function skipBoot() {
-        if (currentState === STATES.BOOT) {
-            endBootSequence();
-        }
-    }
+    function skipBoot() { if (currentState === STATES.BOOT) endBootSequence(); }
 
-    // Boot event listeners
     bootOverlay.addEventListener('click', skipBoot);
     document.addEventListener('keydown', skipBoot);
 
-    // Start boot sequence
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', typeBootSequence);
-    } else {
-        typeBootSequence();
-    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', typeBootSequence);
+    else typeBootSequence();
 
     // ==========================================================================
     // TELEMETRY / COUNTERS
@@ -112,19 +78,11 @@
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
             el.textContent = Math.floor(progress * (end - start) + start);
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            } else {
-                el.textContent = end;
-            }
+            if (progress < 1) window.requestAnimationFrame(step);
+            else el.textContent = end;
         };
         window.requestAnimationFrame(step);
     }
-
-    const observerOptions = {
-        threshold: 0.5,
-        rootMargin: '0px'
-    };
 
     const telemetryObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -135,7 +93,7 @@
                 observer.unobserve(el);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.5, rootMargin: '0px' });
 
     telemValues.forEach(el => telemetryObserver.observe(el));
 
@@ -143,38 +101,23 @@
     // CASE FILE INTERACTIONS
     // ==========================================================================
     const caseFiles = document.querySelectorAll('.case-file');
-
     caseFiles.forEach(file => {
-        file.addEventListener('click', () => {
-            currentState = STATES.CASE_FOCUS;
-            eventBus.emit('stateChange', currentState);
-        });
-        
-        // Keyboard accessibility
+        file.addEventListener('click', () => { currentState = STATES.CASE_FOCUS; eventBus.emit('stateChange', currentState); });
         file.setAttribute('tabindex', '0');
-        file.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                file.click();
-            }
-        });
+        file.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); file.click(); } });
     });
 
-    // Banner CTA
     document.getElementById('banner-cta').addEventListener('click', () => {
         document.getElementById('case-files').scrollIntoView({ behavior: 'smooth' });
         currentState = STATES.CASE_FOCUS;
         eventBus.emit('stateChange', currentState);
     });
 
-    // Smooth scroll for nav links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     });
 
@@ -199,7 +142,6 @@
 
     setInterval(updateClock, 1000);
     updateClock();
-
     window.addEventListener('scroll', updateScrollProgress, { passive: true });
     updateScrollProgress();
 
@@ -235,68 +177,38 @@
 
     function drawParticles() {
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        
         particles.forEach(p => {
-            p.x += p.vx;
-            p.y += p.vy;
-
+            p.x += p.vx; p.y += p.vy;
             if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
             if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(0, 172, 193, 0.3)';
-            ctx.fill();
+            ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0, 172, 193, 0.3)'; ctx.fill();
         });
 
-        // Draw connections
         for (let i = 0; i < particles.length; i++) {
             for (let j = i + 1; j < particles.length; j++) {
                 const dx = particles[i].x - particles[j].x;
                 const dy = particles[i].y - particles[j].y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < 120) {
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(0, 172, 193, ${0.1 * (1 - dist / 120)})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(0, 172, 193, ${0.1 * (1 - dist / 120)})`; ctx.lineWidth = 0.5; ctx.stroke();
                 }
             }
         }
-
-        if (!isPaused) {
-            animationFrameId = requestAnimationFrame(drawParticles);
-        }
+        if (!isPaused) animationFrameId = requestAnimationFrame(drawParticles);
     }
 
     function handleVisibilityChange() {
-        if (document.hidden) {
-            isPaused = true;
-            cancelAnimationFrame(animationFrameId);
-        } else {
-            isPaused = false;
-            drawParticles();
-        }
-    }
-
-    function handleResize() {
-        initCanvas();
+        if (document.hidden) { isPaused = true; cancelAnimationFrame(animationFrameId); }
+        else { isPaused = false; drawParticles(); }
     }
 
     if (!prefersReducedMotion && window.innerWidth > 860) {
-        initCanvas();
-        drawParticles();
+        initCanvas(); drawParticles();
         document.addEventListener('visibilitychange', handleVisibilityChange);
-        window.addEventListener('resize', handleResize);
+        window.addEventListener('resize', initCanvas);
     }
 
-    // ==========================================================================
-    // INIT
-    // ==========================================================================
-    eventBus.on('stateChange', (newState) => {
-        console.log(`State transitioned to: ${newState}`);
-    });
-
+    eventBus.on('stateChange', (newState) => console.log(`State transitioned to: ${newState}`));
 })();
