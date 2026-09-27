@@ -2,236 +2,69 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Priyansh Raval — Full-Stack Engineer</title>
-<meta name="description" content="Full-Stack Engineer who owns features from whiteboard to production. React, TypeScript, Python, FastAPI, PostgreSQL.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IIoT Sentinel — Autonomous Industrial Cyber Defense</title>
+<meta name="description" content="Interactive demo of a layered agentic AI framework for Industrial IoT security — edge telemetry, hybrid IDS, explainable AI, and hardware-enforced safe-state control.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Particle background -->
-<canvas id="particles"></canvas>
-<!-- Custom cursor -->
-<div id="cursor"></div>
-<div id="cursor-dot"></div>
-<!-- Scanline overlay -->
-<div class="scanlines"></div>
-
-<nav>
-  <div class="container nav-inner">
-    <div class="logo">Priyansh<span>.dev</span></div>
-    <div class="nav-links" id="navLinks">
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="https://github.com/ravalpriyansh779-cpu" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://www.linkedin.com/in/priyansh-raval-3a98b7366/" target="_blank" rel="noopener">LinkedIn</a>
-      <button class="hacker-toggle" onclick="toggleTerminal()">⌘ Hacker Mode</button>
-    </div>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
-  </div>
-</nav>
-
-<section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-content reveal">
-      <p class="eyebrow">$ whoami → Available for SWE roles</p>
-      <h1>Priyansh Raval<br><span>Full-Stack Engineer</span></h1>
-      <p class="hero-sub">
-        I own features from whiteboard to production — real-time systems, multi-tenant RAG, and secure AI-assisted tools. I ship, measure, and iterate.
-      </p>
-      <div class="cta-buttons">
-        <a href="#projects" class="btn btn-primary">▶ View Case Studies</a>
-        <a href="https://github.com/ravalpriyansh779-cpu" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
-        <a href="mailto:23bit084@sot.pdpu.ac.in" class="btn btn-secondary">Contact</a>
-      </div>
-      <div class="trust-badges">
-        <span class="badge">🏢 SDE Intern @ SITESEW</span>
-        <span class="badge">📉 40% latency ↓</span>
-        <span class="badge">⚡ 77% faster deploys</span>
-        <span class="badge">📄 Published @ ICAWTM-26</span>
-      </div>
-    </div>
-    <div class="hero-visual reveal">
-      <div class="terminal-preview">
-        <div class="terminal-header">
-          <span class="dot red"></span>
-          <span class="dot yellow"></span>
-          <span class="dot green"></span>
-          <span class="term-title">priyansh@portfolio:~</span>
-          <span class="term-clock" id="termClock"></span>
-        </div>
-        <div class="terminal-body">
-          <p><span class="prompt">$</span> whoami</p>
-          <p class="output">Priyansh — owns features end-to-end</p>
-          <p><span class="prompt">$</span> cat impact.txt</p>
-          <p class="output">→ 40% API latency reduction (indexing + pooling)</p>
-          <p class="output">→ 45min → 10min CI/CD deploys</p>
-          <p class="output">→ Multi-tenant RAG with hard isolation</p>
-          <p class="output">→ Real RBAC for AI agents (no backdoors)</p>
-          <p><span class="prompt">$</span> echo $STATUS</p>
-          <p class="output success">● open to SWE roles</p>
-          <p><span class="prompt">$</span> <span class="cursor">_</span></p>
-        </div>
-      </div>
+<header>
+  <div class="brand">
+    <div class="sigil">◈</div>
+    <div>
+      <h1>IIoT <span>SENTINEL</span></h1>
+      <small>AUTONOMOUS IIoT DEFENSE PLATFORM</small>
     </div>
   </div>
-</section>
-
-<section class="projects" id="projects">
-  <div class="container">
-    <h2 class="section-title reveal">Case Studies</h2>
-    <p class="section-sub reveal">Three systems I owned end-to-end: problem → architecture → shipped result.</p>
-    <div class="project-grid">
-
-      <article class="project-card reveal">
-        <div class="proj-num">01</div>
-        <div class="project-header">
-          <h3 class="project-title">PulseBoard</h3>
-          <div class="project-tech">
-            <span class="tech-tag">React</span>
-            <span class="tech-tag">TypeScript</span>
-            <span class="tech-tag">Socket.IO</span>
-            <span class="tech-tag">PostgreSQL</span>
-          </div>
-        </div>
-        <p class="project-description">
-          Real-time collaborative Kanban with sub-second live sync. Optimistic UI + last-write-wins conflict resolution. JWT auth + Socket.IO rooms scoped per board.
-        </p>
-        <p class="project-owned"><strong>◆ I owned:</strong> realtime protocol, optimistic updates, RBAC schema, conflict strategy (LWW chosen for coarse-grained moves).</p>
-        <div class="project-links">
-          <a href="https://github.com/ravalpriyansh779-cpu/pulseboard" target="_blank" rel="noopener">📂 Code →</a>
-        </div>
-      </article>
-
-      <article class="project-card reveal">
-        <div class="proj-num">02</div>
-        <div class="project-header">
-          <h3 class="project-title">TaskForge</h3>
-          <div class="project-tech">
-            <span class="tech-tag">React</span>
-            <span class="tech-tag">Node.js</span>
-            <span class="tech-tag">JWT/RBAC</span>
-            <span class="tech-tag">Docker</span>
-          </div>
-        </div>
-        <p class="project-description">
-          Secure AI ops dashboard where the AI assistant is bound by the same RBAC rules as humans — no backdoor. Every tool call is re-authorized and audit-logged.
-        </p>
-        <p class="project-owned"><strong>◆ I owned:</strong> permission matrix (Admin/Operator/Viewer), audit logging, Docker setup, AI tool boundary design.</p>
-        <div class="project-links">
-          <a href="https://github.com/ravalpriyansh779-cpu/TaskForge-" target="_blank" rel="noopener">📂 Code →</a>
-          <a href="https://task-forge-two-sigma.vercel.app" target="_blank" rel="noopener">🔗 Live Demo →</a>
-        </div>
-      </article>
-
-      <article class="project-card reveal">
-        <div class="proj-num">03</div>
-        <div class="project-header">
-          <h3 class="project-title">CampusLens</h3>
-          <div class="project-tech">
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">FastAPI</span>
-            <span class="tech-tag">Pinecone</span>
-            <span class="tech-tag">React</span>
-          </div>
-        </div>
-        <p class="project-description">
-          Multi-tenant RAG platform with hard isolation via Pinecone namespaces. JWT carries tenant_id — no client-side trust. Citation-grounded answers prevent hallucinations.
-        </p>
-        <p class="project-owned"><strong>◆ I owned:</strong> 3-layer tenant isolation, ingestion pipeline, citation-grounded prompts, FastAPI + React full stack.</p>
-        <div class="project-links">
-          <a href="https://github.com/ravalpriyansh779-cpu/CampusLens" target="_blank" rel="noopener">📂 Code →</a>
-        </div>
-      </article>
-
-    </div>
+  <div class="status">
+    <span class="live"><i></i>LIVE SIMULATION</span>
+    <span class="threattag">THREAT LEVEL: <b id="threat">LOW</b></span>
   </div>
-</section>
+</header>
 
-<section class="experience" id="experience">
-  <div class="container">
-    <h2 class="section-title reveal">Experience</h2>
-    <div class="experience-item reveal">
-      <div class="experience-header">
-        <div>
-          <div class="experience-company">SITESEW · IT Product & Services</div>
-          <div class="experience-title">Software Developer Intern</div>
-        </div>
-        <div class="experience-date">May 2026 – Jul 2026</div>
-      </div>
-      <div class="experience-metrics">
-        <div class="metric-card">
-          <div class="metric-value">40%</div>
-          <div class="metric-label">p95 latency ↓</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value">77%</div>
-          <div class="metric-label">deploy time saved</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value">45→10</div>
-          <div class="metric-label">min per deploy</div>
-        </div>
-      </div>
-      <p class="experience-description">
-        Designed and shipped scalable REST APIs (FastAPI + PostgreSQL). Optimized query performance via indexing + connection pooling. Built automated CI/CD with GitHub Actions. Owned features end-to-end in an Agile, cross-functional team — translating product requirements into technical specs.
-      </p>
+<div class="layout">
+  <aside>
+    <div class="navtitle">OPERATIONS</div>
+    <nav>
+      <button class="active" onclick="show('dashboard',this)">◈ COMMAND CENTER</button>
+      <button onclick="show('traffic',this)">⌁ TRAFFIC MATRIX</button>
+      <button onclick="show('ids',this)">◉ HYBRID IDS CORE</button>
+    </nav>
+    <div class="navtitle">AI REASONING LAYER</div>
+    <nav>
+      <button onclick="show('xai',this)">✦ EXPLAINABLE AI</button>
+      <button onclick="show('context',this)">◎ THREAT CONTEXT</button>
+      <button onclick="show('agent',this)">◇ AGENTIC REASONER</button>
+    </nav>
+    <div class="navtitle">HARDWARE SAFETY LAYER</div>
+    <nav>
+      <button onclick="show('firmware',this)">⬡ FIRMWARE TRUST</button>
+      <button onclick="show('policy',this)">▣ POLICY GATE</button>
+      <button onclick="show('mcu',this)">⬢ DUAL-MCU CONTROL</button>
+    </nav>
+    <div class="navtitle">FORENSICS</div>
+    <nav><button onclick="show('forensics',this)">▤ FORENSICS / REPLAY</button></nav>
+    <div class="mini">
+      SYSTEM INTEGRITY<br><b>████████████████ 98.7%</b>
+      <div class="dot"><span></span></div><br>
+      NODE: <b>EDGE-07</b><br>
+      LINK: <b>ENCRYPTED</b>
     </div>
-  </div>
-</section>
+  </aside>
+  <main id="app"></main>
+</div>
 
-<section class="skills" id="skills">
-  <div class="container">
-    <h2 class="section-title reveal">Technical Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-category reveal"><h3>Languages</h3>
-        <div class="skill-list"><span class="skill-tag">TypeScript</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Python</span><span class="skill-tag">SQL</span></div></div>
-      <div class="skill-category reveal"><h3>Frontend</h3>
-        <div class="skill-list"><span class="skill-tag">React</span><span class="skill-tag">Vite</span><span class="skill-tag">UI Components</span><span class="skill-tag">Tailwind</span></div></div>
-      <div class="skill-category reveal"><h3>Backend</h3>
-        <div class="skill-list"><span class="skill-tag">Node.js</span><span class="skill-tag">FastAPI</span><span class="skill-tag">REST APIs</span><span class="skill-tag">WebSockets</span></div></div>
-      <div class="skill-category reveal"><h3>Databases</h3>
-        <div class="skill-list"><span class="skill-tag">PostgreSQL</span><span class="skill-tag">Pinecone</span><span class="skill-tag">Redis</span></div></div>
-      <div class="skill-category reveal"><h3>DevOps</h3>
-        <div class="skill-list"><span class="skill-tag">Docker</span><span class="skill-tag">CI/CD</span><span class="skill-tag">GitHub Actions</span><span class="skill-tag">Git</span></div></div>
-      <div class="skill-category reveal"><h3>Practices</h3>
-        <div class="skill-list"><span class="skill-tag">System Design</span><span class="skill-tag">RBAC</span><span class="skill-tag">E2E Ownership</span><span class="skill-tag">Agile</span></div></div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <div class="footer-links">
-      <a href="https://github.com/ravalpriyansh779-cpu" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://www.linkedin.com/in/priyansh-raval-3a98b7366/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:23bit084@sot.pdpu.ac.in">Email</a>
-    </div>
-    <p class="footer-copy">© <span id="year"></span> Priyansh Raval · Hand-coded · Zero frameworks · No build step</p>
-  </div>
-</footer>
-
-<!-- FULL INTERACTIVE TERMINAL (Hacker Mode) -->
-<div class="terminal-overlay" id="terminalOverlay">
-  <div class="term-window">
-    <div class="term-bar">
-      <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-      <span class="term-title">priyansh@portfolio:~</span>
-      <button class="close-terminal" onclick="toggleTerminal()">✕ exit</button>
-    </div>
-    <div class="term-body" id="termBody">
-      <div id="termHistory"></div>
-      <div class="input-line">
-        <span class="prompt">priyansh@portfolio:~ ❯</span>
-        <input id="termInput" type="text" autofocus autocomplete="off" spellcheck="false" placeholder="type 'help' or any command…"/>
-      </div>
-    </div>
+<div class="modal" id="modal">
+  <div class="modalbox">
+    <h2>⚠ SIMULATED THREAT DETECTED</h2>
+    <p>A simulated unauthorized Modbus/TCP write burst has entered the demo control network. The defense pipeline below is now active.</p>
+    <pre id="json"></pre>
+    <button class="btn danger" onclick="closeModal()">ACKNOWLEDGE</button>
   </div>
 </div>
+
+<footer>IIoT SENTINEL — INTERACTIVE SOFTWARE DEMONSTRATOR — NO REAL PLC OR ACTUATOR COMMANDS ARE TRANSMITTED</footer>
 
 <script src="main.js"></script>
 </body>
