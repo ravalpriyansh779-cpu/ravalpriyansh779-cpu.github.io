@@ -3,173 +3,366 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRIYANSH RAVAL // SOFTWARE ENGINEER</title>
-    <link rel="stylesheet" href="style.css">
+    <title>PRIYANSH RAVAL // SYSTEM OPERATOR</title>
+    <meta name="description" content="Portfolio of Priyansh Raval, Full-Stack Software Engineer. Open to SWE intern & full-time roles.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Fira+Code:wght@400;700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Textures & Canvas -->
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+    <div class="texture-overlay" aria-hidden="true"></div>
 
-    <!-- HEADER -->
-    <header>
-        <div class="brand">
-            <div class="sigil">◈</div>
-            <div>
-                <h1>PRIYANSH <span>RAVAL</span></h1>
-                <small>SOFTWARE ENGINEER // AI & FULL-STACK</small>
-            </div>
+    <!-- Boot Sequence -->
+    <div id="boot-overlay" class="boot-overlay" aria-hidden="true">
+        <div class="boot-log" id="boot-log"></div>
+        <div class="boot-skip">CLICK OR PRESS ANY KEY TO SKIP</div>
+    </div>
+
+    <!-- Incident Banner -->
+    <div id="incident-banner" class="incident-banner" role="status">
+        <span class="glyph">⚠</span> RECRUITMENT WINDOW ACTIVE — SWE INTERN & FULL-TIME ROLES
+        <button id="banner-cta" class="banner-cta">ACKNOWLEDGE → VIEW CASE FILES</button>
+    </div>
+
+    <!-- Navigation -->
+    <header class="nav-header">
+        <div class="nav-brand">
+            <span class="glyph">◈</span> PRIYANSH RAVAL
         </div>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#arsenal">Arsenal</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
+        <nav class="nav-links" aria-label="Main Navigation">
+            <a href="#case-files">CASE FILES</a>
+            <a href="#field-report">FIELD REPORT</a>
+            <a href="#stack">STACK</a>
+            <a href="#contact">CONTACT</a>
         </nav>
+        <div class="nav-actions">
+            <a href="https://github.com/ravalpriyansh779-cpu" target="_blank" rel="noopener" class="btn-nav">GITHUB</a>
+            <a href="https://www.linkedin.com/in/priyansh-raval-3a98b7366" target="_blank" rel="noopener" class="btn-nav">LINKEDIN</a>
+        </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section id="hero" class="hero">
-        <div class="hero-content">
-            <div class="eyebrow">SYSTEM.ONLINE // PORTFOLIO.READY</div>
-            <h2>I'm Priyansh.</h2>
-            <p class="terminal-text">> Software Enthusiast. Lifetime Learner. AI/ML Researcher.</p>
-            <p class="description">
-                Software Engineering student turning ideas into production-ready, end-to-end systems. 
-                I take features from whiteboard → design → implementation → deployment.
-            </p>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn">VIEW MY WORK</a>
-                <a href="https://linkedin.com/in/priyansh-raval-3a98b7366/" target="_blank" class="btn danger">LINKEDIN</a>
-            </div>
-        </div>
-    </section>
+    <main>
+        <!-- HERO SECTION -->
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <div class="eyebrow"><span class="glyph">◈</span> SYSTEM OPERATOR // PDEU-07</div>
+                <h1 class="hero-title">Full-Stack Software Engineer</h1>
+                <p class="hero-subtitle">I own features from whiteboard to production. Specializing in scalable backends, real-time systems, and AI-native applications.</p>
+                
+                <div class="hero-ctas">
+                    <a href="#case-files" class="btn-primary">VIEW CASE FILES</a>
+                    <a href="mailto:23bit084@sot.pdpu.ac.in" class="btn-secondary">CONTACT</a>
+                </div>
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="section">
-        <h2 class="section-title">THE MISSION</h2>
-        <div class="about-grid">
-            <div class="card">
-                <div class="label">EDUCATION</div>
-                <p>B.Tech in Information & Communications Technology, Pandit Deendayal Energy University (2023–2027)</p>
+                <div class="trust-badges">
+                    <span class="badge">SDE Intern @ SITESEW</span>
+                    <span class="badge">40% latency ↓</span>
+                    <span class="badge">77% faster deploys</span>
+                    <span class="badge">Published @ ICAWTM-26</span>
+                </div>
             </div>
-            <div class="card">
-                <div class="label">RESEARCH</div>
-                <p>Published paper at ICAWTM-26: ML-driven energy optimization for smart wastewater treatment plants.</p>
-            </div>
-            <div class="card">
-                <div class="label">FOCUS</div>
-                <p>Currently deepening my knowledge of system design, distributed systems, and AI-native application architecture.</p>
-            </div>
-        </div>
-    </section>
 
-    <!-- TECH ARSENAL SECTION -->
-    <section id="arsenal" class="section">
-        <h2 class="section-title">THE ARSENAL</h2>
-        <div class="arsenal-grid">
-            <div class="skill-category">
-                <h3>Languages</h3>
-                <img src="https://skillicons.dev/icons?i=js,ts,py,java,cpp" height="80" alt="Languages" />
-            </div>
-            <div class="skill-category">
-                <h3>Backend & APIs</h3>
-                <img src="https://skillicons.dev/icons?i=nodejs,express,fastapi,spring" height="80" alt="Backend" />
-                <div class="badge-container">
-                    <img src="https://img.shields.io/badge/REST_APIs-02569B?style=for-the-badge" height="35" />
-                    <img src="https://img.shields.io/badge/WebSockets-010101?style=for-the-badge&logo=socket.io&logoColor=white" height="35" />
-                    <img src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens" height="35" />
-                    <img src="https://img.shields.io/badge/RBAC-00d9ff?style=for-the-badge" height="35" />
+            <!-- Telemetry Panel -->
+            <div class="telemetry-panel" aria-label="System Telemetry">
+                <div class="telemetry-header"><span class="glyph">⌁</span> LIVE TELEMETRY</div>
+                <div class="telemetry-grid">
+                    <div class="telemetry-item">
+                        <div class="telem-label">LATENCY REDUCTION</div>
+                        <div class="telem-value" data-target="40">0</div>
+                        <div class="telem-unit">%</div>
+                    </div>
+                    <div class="telemetry-item">
+                        <div class="telem-label">DEPLOY TIME SAVED</div>
+                        <div class="telem-value" data-target="77">0</div>
+                        <div class="telem-unit">%</div>
+                    </div>
+                    <div class="telemetry-item">
+                        <div class="telem-label">DEPLOY TIME (MIN)</div>
+                        <div class="telem-value" data-target="45">0</div>
+                        <div class="telem-unit">→ 10</div>
+                    </div>
+                    <div class="telemetry-item">
+                        <div class="telem-label">SYSTEMS SHIPPED</div>
+                        <div class="telem-value" data-target="3">0</div>
+                        <div class="telem-unit">units</div>
+                    </div>
                 </div>
             </div>
-            <div class="skill-category">
-                <h3>Frontend</h3>
-                <img src="https://skillicons.dev/icons?i=react,html,css,tailwind" height="80" alt="Frontend" />
-            </div>
-            <div class="skill-category">
-                <h3>Databases & Data</h3>
-                <img src="https://skillicons.dev/icons?i=postgres,mongodb,redis" height="80" alt="Databases" />
-                <div class="badge-container">
-                    <img src="https://img.shields.io/badge/SQL-4479A1?style=for-the-badge" height="35" />
-                    <img src="https://img.shields.io/badge/Pinecone_Vector_DB-000000?style=for-the-badge&logo=pinecone&logoColor=white" height="35" />
-                </div>
-            </div>
-            <div class="skill-category">
-                <h3>Cloud & DevOps</h3>
-                <img src="https://skillicons.dev/icons?i=docker,githubactions,aws,gcp,git,linux" height="80" alt="Cloud" />
-                <div class="badge-container">
-                    <img src="https://img.shields.io/badge/CI%2FCD-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" height="35" />
-                </div>
-            </div>
-            <div class="skill-category">
-                <h3>AI/ML</h3>
-                <div class="badge-container">
-                    <img src="https://img.shields.io/badge/RAG-00d9ff?style=for-the-badge" height="35" />
-                    <img src="https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white" height="35" />
-                    <img src="https://img.shields.io/badge/Machine_Learning-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" height="35" />
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- PROJECTS SECTION -->
-    <section id="projects" class="section">
-        <h2 class="section-title">FEATURED PROJECTS</h2>
-        <div class="projects-grid">
-            <!-- Project 1 -->
-            <div class="project-card">
-                <div class="project-header">
-                    <h3>CampusLens</h3>
-                    <span class="tag">RAG PLATFORM</span>
-                </div>
-                <p>Multi-tenant RAG platform. Architected a scalable backend with namespace-scoped vector search across isolated tenants using Pinecone + PostgreSQL.</p>
-                <div class="tech-tags">
-                    <span>React</span><span>FastAPI</span><span>Python</span><span>LangChain</span>
-                </div>
-                <a href="https://github.com/ravalpriyansh779-cpu/CampusLens" target="_blank" class="btn project-btn">VIEW REPO</a>
-            </div>
-            <!-- Project 2 -->
-            <div class="project-card">
-                <div class="project-header">
-                    <h3>TaskForge</h3>
-                    <span class="tag">AI DASHBOARD</span>
-                </div>
-                <p>Secure AI operations dashboard. Production-ready with JWT auth, route-level authorization, and audit-logged AI agent tool-calls, containerized with Docker.</p>
-                <div class="tech-tags">
-                    <span>React</span><span>TypeScript</span><span>Node.js</span><span>Docker</span>
-                </div>
-                <a href="https://github.com/ravalpriyansh779-cpu/TaskForge-" target="_blank" class="btn project-btn">VIEW REPO</a>
-            </div>
-            <!-- Project 3 -->
-            <div class="project-card">
-                <div class="project-header">
-                    <h3>PulseBoard</h3>
-                    <span class="tag">REALTIME KANBAN</span>
-                </div>
-                <p>Sub-second, multi-user sync via WebSocket event broadcasting and optimistic UI updates, backed by a PostgreSQL schema with RBAC.</p>
-                <div class="tech-tags">
-                    <span>React</span><span>Node.js</span><span>Socket.io</span><span>PostgreSQL</span>
-                </div>
-                <a href="https://github.com/ravalpriyansh779-cpu/pulseboard" target="_blank" class="btn project-btn">VIEW REPO</a>
-            </div>
-        </div>
-    </section>
+        <!-- CASE FILES SECTION -->
+        <section id="case-files" class="section">
+            <h2 class="section-title"><span class="glyph">◉</span> CASE FILES</h2>
+            
+            <!-- CASE FILE 01 -->
+            <article class="case-file" id="case-01">
+                <header class="case-header">
+                    <h3>CASE FILE 01 // PULSEBOARD</h3>
+                    <span class="status-chip">ACTIVE</span>
+                </header>
+                <p class="case-problem"><strong>PROBLEM:</strong> Multi-user board edits caused refresh conflicts and lost updates.</p>
+                
+                <pre class="ascii-diagram" aria-label="Architecture Diagram">
+ CLIENT <-- WebSocket --> SERVER <-- SQL --> DB
+   |                        |
+   +-- Optimistic UI        +-- Socket.IO Rooms
+                </pre>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="section">
-        <h2 class="section-title">LET'S CONNECT</h2>
-        <div class="contact-container">
-            <p>I'm actively looking for Software Engineer / AI-Backend roles. Available immediately.</p>
-            <div class="contact-links">
-                <a href="mailto:priyanshraval26@gmail.com" class="btn">SEND AN EMAIL</a>
-                <a href="https://www.linkedin.com/in/priyansh-raval-3a98b7366/" target="_blank" class="btn danger">LINKEDIN</a>
-            </div>
-        </div>
-    </section>
+                <div class="case-body">
+                    <div class="case-details">
+                        <h4>I OWNED</h4>
+                        <ul>
+                            <li>Optimistic UI & last-write-wins conflict resolution</li>
+                            <li>Board-scoped Socket.IO rooms</li>
+                            <li>RBAC schema with fractional card positioning</li>
+                        </ul>
+                    </div>
+                    <div class="case-impact">
+                        <h4>IMPACT</h4>
+                        <div class="impact-meter">
+                            <span>SYNC SPEED: SUB-SECOND</span>
+                            <span class="meter-bar">██████████</span>
+                        </div>
+                        <div class="impact-meter">
+                            <span>LOST UPDATES: ZERO</span>
+                            <span class="meter-bar">██████████</span>
+                        </div>
+                    </div>
+                </div>
 
-    <footer>
-        <p>PRIYANSH RAVAL // SOFTWARE ENGINEER // © 2026</p>
+                <div class="case-footer">
+                    <div class="tech-chips">
+                        <span class="chip" title="Frontend library">React</span>
+                        <span class="chip" title="Typed JavaScript">TypeScript</span>
+                        <span class="chip" title="Node.js server framework">Express</span>
+                        <span class="chip" title="Real-time bidirectional event-based communication">Socket.IO</span>
+                        <span class="chip" title="Relational database">PostgreSQL</span>
+                    </div>
+                    <a href="https://github.com/ravalpriyansh779-cpu/pulseboard" target="_blank" rel="noopener" class="btn-case">VIEW CODE</a>
+                </div>
+            </article>
+
+            <!-- CASE FILE 02 -->
+            <article class="case-file" id="case-02">
+                <header class="case-header">
+                    <h3>CASE FILE 02 // TASKFORGE</h3>
+                    <span class="status-chip">LIVE</span>
+                </header>
+                <p class="case-problem"><strong>PROBLEM:</strong> An AI assistant inside a dashboard must never outrank its human user.</p>
+                
+                <pre class="ascii-diagram" aria-label="Architecture Diagram">
+ CLIENT <-- JWT --> API <-- RBAC --> DB
+   |                  |
+   +-- React          +-- Audit Logs
+                </pre>
+
+                <div class="case-body">
+                    <div class="case-details">
+                        <h4>I OWNED</h4>
+                        <ul>
+                            <li>JWT + refresh rotation & route-level authorization</li>
+                            <li>Admin/Operator/Viewer permission matrix</li>
+                            <li>Full audit logging & env-based secrets</li>
+                        </ul>
+                    </div>
+                    <div class="case-impact">
+                        <h4>IMPACT</h4>
+                        <div class="impact-meter">
+                            <span>PERMISSION ESCAPES: 0</span>
+                            <span class="meter-bar">██████████</span>
+                        </div>
+                        <div class="impact-meter">
+                            <span>AGENT ACTIONS AUDITED: 100%</span>
+                            <span class="meter-bar">██████████</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-footer">
+                    <div class="tech-chips">
+                        <span class="chip" title="Frontend library">React</span>
+                        <span class="chip" title="Typed JavaScript">TypeScript</span>
+                        <span class="chip" title="Node.js server framework">Express</span>
+                        <span class="chip" title="Containerization platform">Docker</span>
+                        <span class="chip" title="Relational database">PostgreSQL</span>
+                    </div>
+                    <div class="case-links">
+                        <a href="https://github.com/ravalpriyansh779-cpu/TaskForge-" target="_blank" rel="noopener" class="btn-case">VIEW CODE</a>
+                        <a href="https://task-forge-two-sigma.vercel.app" target="_blank" rel="noopener" class="btn-case live">LIVE DEMO</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- CASE FILE 03 -->
+            <article class="case-file" id="case-03">
+                <header class="case-header">
+                    <h3>CASE FILE 03 // CAMPUSLENS</h3>
+                    <span class="status-chip">RESEARCH</span>
+                </header>
+                <p class="case-problem"><strong>PROBLEM:</strong> One app, many organizations; each must see only its own documents, and answers must be verifiable.</p>
+                
+                <pre class="ascii-diagram" aria-label="Architecture Diagram">
+ CLIENT <-- REST --> API <-- LangChain --> VECTOR DB
+   |                  |
+   +-- React          +-- Pinecone Namespaces
+                </pre>
+
+                <div class="case-body">
+                    <div class="case-details">
+                        <h4>I OWNED</h4>
+                        <ul>
+                            <li>Tenant-isolated ingestion (chunk → embed → upsert)</li>
+                            <li>Per-tenant Pinecone namespaces & JWT tenant claim</li>
+                            <li>Citation-grounded source-constrained prompts</li>
+                        </ul>
+                    </div>
+                    <div class="case-impact">
+                        <h4>IMPACT</h4>
+                        <div class="impact-meter">
+                            <span>TENANT ISOLATION: HARD</span>
+                            <span class="meter-bar">██████████</span>
+                        </div>
+                        <div class="impact-meter">
+                            <span>HALLUCINATION RATE: MINIMIZED</span>
+                            <span class="meter-bar">████████░░</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-footer">
+                    <div class="tech-chips">
+                        <span class="chip" title="Programming language">Python</span>
+                        <span class="chip" title="Modern web framework for APIs">FastAPI</span>
+                        <span class="chip" title="Frontend library">React</span>
+                        <span class="chip" title="Relational database">PostgreSQL</span>
+                        <span class="chip" title="Vector database for semantic search">Pinecone</span>
+                        <span class="chip" title="Framework for LLM applications">LangChain</span>
+                    </div>
+                    <a href="https://github.com/ravalpriyansh779-cpu/CampusLens" target="_blank" rel="noopener" class="btn-case">VIEW CODE</a>
+                </div>
+            </article>
+        </section>
+
+        <!-- FIELD REPORT SECTION -->
+        <section id="field-report" class="section">
+            <h2 class="section-title"><span class="glyph">⬡</span> FIELD REPORT</h2>
+            <div class="report-card">
+                <header class="report-header">
+                    <h3>SITESEW // SDE INTERN</h3>
+                    <span class="status-chip">MAY–JUL 2026</span>
+                </header>
+                <div class="report-grid">
+                    <div class="report-metric">
+                        <div class="metric-value">40%</div>
+                        <div class="metric-label">p95 API LATENCY REDUCED</div>
+                    </div>
+                    <div class="report-metric">
+                        <div class="metric-value">77%</div>
+                        <div class="metric-label">DEPLOY TIME CUT</div>
+                    </div>
+                    <div class="report-metric">
+                        <div class="metric-value">45→10</div>
+                        <div class="metric-label">MINUTES SAVED</div>
+                    </div>
+                </div>
+                <ul class="report-bullets">
+                    <li>Owned REST APIs (FastAPI + PostgreSQL) end-to-end in an Agile cross-functional team.</li>
+                    <li>Implemented CI/CD pipelines using GitHub Actions.</li>
+                    <li>Optimized database indexing and connection pooling.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- STACK SECTION -->
+        <section id="stack" class="section">
+            <h2 class="section-title"><span class="glyph">▣</span> STACK</h2>
+            <div class="stack-grid">
+                <div class="stack-group">
+                    <h4>LANGUAGES</h4>
+                    <div class="tech-chips">
+                        <span class="chip">JavaScript</span>
+                        <span class="chip">TypeScript</span>
+                        <span class="chip">Python</span>
+                        <span class="chip">Java</span>
+                        <span class="chip">C++</span>
+                    </div>
+                </div>
+                <div class="stack-group">
+                    <h4>FRONTEND</h4>
+                    <div class="tech-chips">
+                        <span class="chip">React</span>
+                        <span class="chip">HTML5</span>
+                        <span class="chip">CSS3</span>
+                        <span class="chip">Tailwind</span>
+                    </div>
+                </div>
+                <div class="stack-group">
+                    <h4>BACKEND</h4>
+                    <div class="tech-chips">
+                        <span class="chip">Node.js</span>
+                        <span class="chip">Express</span>
+                        <span class="chip">FastAPI</span>
+                        <span class="chip">Spring Boot</span>
+                    </div>
+                </div>
+                <div class="stack-group">
+                    <h4>DATA</h4>
+                    <div class="tech-chips">
+                        <span class="chip">PostgreSQL</span>
+                        <span class="chip">MongoDB</span>
+                        <span class="chip">Redis</span>
+                        <span class="chip">Pinecone</span>
+                    </div>
+                </div>
+                <div class="stack-group">
+                    <h4>DEVOPS</h4>
+                    <div class="tech-chips">
+                        <span class="chip">Docker</span>
+                        <span class="chip">GitHub Actions</span>
+                        <span class="chip">AWS</span>
+                        <span class="chip">GCP</span>
+                    </div>
+                </div>
+                <div class="stack-group">
+                    <h4>PRACTICES</h4>
+                    <div class="tech-chips">
+                        <span class="chip" title="Each role sees only the actions it is allowed to perform">RBAC</span>
+                        <span class="chip" title="Secure token-based authentication">JWT</span>
+                        <span class="chip" title="Real-time bidirectional communication">WebSockets</span>
+                        <span class="chip" title="Retrieval-Augmented Generation">RAG</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="section">
+            <h2 class="section-title"><span class="glyph">◇</span> CONTACT</h2>
+            <div class="contact-container">
+                <p>System status: <strong>OPEN_TO_ROLES</strong>. Available for SWE intern and full-time positions.</p>
+                <div class="contact-links">
+                    <a href="mailto:23bit084@sot.pdpu.ac.in" class="btn-primary">SEND EMAIL</a>
+                    <a href="https://github.com/ravalpriyansh779-cpu" target="_blank" rel="noopener" class="btn-secondary">GITHUB</a>
+                    <a href="https://www.linkedin.com/in/priyansh-raval-3a98b7366" target="_blank" rel="noopener" class="btn-secondary">LINKEDIN</a>
+                </div>
+                <div class="sign-off">
+                    hand-coded · zero frameworks · no build step
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Fixed Status Bar -->
+    <footer class="status-bar" aria-label="System Status">
+        <div class="status-segment">NODE: PDEU-07</div>
+        <div class="status-segment">LINK: ENCRYPTED</div>
+        <div class="status-segment">STATUS: OPEN_TO_ROLES</div>
+        <div class="status-segment" id="live-clock">00:00:00</div>
+        <div class="status-segment" id="scroll-progress">SCROLL: 0%</div>
     </footer>
 
     <script src="main.js"></script>
