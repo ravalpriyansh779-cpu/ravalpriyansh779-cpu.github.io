@@ -1,189 +1,87 @@
-/* ==========================================================================
-   PRIYANSH RAVAL // CYBERPUNK HUD PORTFOLIO
-   IIFE → STATE → EVENT BUS → BOOT → TELEMETRY → INTERACTIONS → STATUS → CANVAS → INIT
-   ========================================================================== */
+/* ============================================================
+   PHOSPHOR WORKBENCH — Priyansh Raval Portfolio
+   Vanilla JS. Zero dependencies. No build step.
+   ============================================================ */
 
 (function () {
     'use strict';
 
-    /* ======================================================================
-       CONSTANTS & STATE
-       ====================================================================== */
-    const STATES = {
-        BOOT: 'BOOT',
-        BROWSE: 'BROWSE',
-        CASE_FOCUS: 'CASE_FOCUS',
-        CONTACT: 'CONTACT'
-    };
+    /* ============================================================
+       CONFIG & STATE
+       ============================================================ */
+    const PREFERS_REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const STORAGE_KEY = 'pr-theme';
 
     const state = {
-        current: STATES.BOOT,
-        bootComplete: false,
-        prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-        isMobile: window.innerWidth <= 860
+        prefersReducedMotion: PREFERS_REDUCED_MOTION,
+        isMobile: window.innerWidth <= 900
     };
 
-    /* ======================================================================
-       EVENT BUS — tiny pub/sub for decoupled modules
-       ====================================================================== */
-    const eventBus = {
-        events: Object.create(null),
-        on(event, callback) {
-            if (!this.events[event]) this.events[event] = [];
-            this.events[event].push(callback);
-            return () => this.off(event, callback);
-        },
-        off(event, callback) {
-            if (!this.events[event]) return;
-            this.events[event] = this.events[event].filter(cb => cb !== callback);
-        },
-        emit(event, data) {
-            if (!this.events[event]) return;
-            this.events[event].forEach(callback => {
-                try { callback(data); }
-                catch (err) { console.error(`[EventBus] Error in "${event}" handler:`, err); }
-            });
-        }
-    };
-
-    /* ======================================================================
+    /* ============================================================
        UTILITIES
-       ====================================================================== */
-    const $ = (selector, root = document) => root.querySelector(selector);
-    const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+       ============================================================ */
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-    function onReady(fn) {
+    const onReady = (fn) => {
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', fn);
+            document.addEventListener('DOMContentLoaded', fn, { once: true });
         } else {
             fn();
         }
-    }
+    };
 
-    /* ======================================================================
-       BOOT SEQUENCE
-       ====================================================================== */
-    const BootSequence = (() => {
-        const overlay = $('#boot-overlay');
-        const log = $('#boot-log');
+    /* ============================================================
+       THEME TOGGLE
+       ============================================================ */
+    const Theme = (() => {
+        const root = document.documentElement;
+        const toggle = $('#theme-toggle');
 
-        const lines = [
-            '> INITIALIZING OPERATOR SHELL...',
-            '> LOADING CASE FILES...',
-            '> ESTABLISHING SECURE CONNECTION...',
-            '> INTEGRITY CHECK: 98.7%',
-            '> SYSTEM READY.'
-        ];
-
-        let timer = null;
-        let finished = false;
-
-        function type() {
-            if (!log) return;
-
-            if (state.prefersReducedMotion) {
-                log.textContent = lines.join('\n');
-                finish();
-                return;
+        function apply(theme) {
+            root.setAttribute('data-theme', theme);
+            const metaTheme = document.querySelector('meta[name="theme-color"]');
+            if (metaTheme) {
+                metaTheme.setAttribute('content', theme === 'dark' ? '#0f1419' : '#f7f6f3');
             }
-
-            let lineIdx = 0;
-            let charIdx = 0;
-            let buffer = '';
-
-            function tick() {
-                if (lineIdx >= lines.length) {
-                    setTimeout(finish, 600);
-                    return;
-                }
-
-                const line = lines[lineIdx];
-
-                if (charIdx < line.length) {
-                    buffer += line[charIdx++];
-                    log.textContent = buffer + '█';
-                    timer = setTimeout(tick, 28);
-                } else {
-                    buffer += '\n';
-                    log.textContent = buffer + '█';
-                    lineIdx++;
-                    charIdx = 0;
-                    timer = setTimeout(tick, 350);
-                }
-            }
-
-            tick();
+            try { localStorage.setItem(STORAGE_KEY, theme); } catch (e) {}
         }
 
-        function finish() {
-            if (finished) return;
-            finished = true;
-            clearTimeout(timer);
-
-            if (overlay) {
-                overlay.classList.add('hidden');
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 600);
-            }
-
-            state.bootComplete = true;
-            transitionTo(STATES.BROWSE);
+        function getInitial() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved === 'light' || saved === 'dark') return saved;
+            } catch (e) {}
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
         }
 
-        function skip() {
-            if (!state.bootComplete) finish();
+        function toggleTheme() {
+            const current = root.getAttribute('data-theme') || 'dark';
+            apply(current === 'dark' ? 'light' : 'dark');
         }
 
         function init() {
-            if (!overlay) return;
-
-            // Always hide on reduced motion
-            if (state.prefersReducedMotion) {
-                overlay.style.display = 'none';
-                state.bootComplete = true;
-                transitionTo(STATES.BROWSE);
-                return;
+            apply(getInitial());
+            if (toggle) {
+                toggle.addEventListener('click', toggleTheme);
             }
-
-            overlay.addEventListener('click', skip, { once: true });
-            document.addEventListener('keydown', skip, { once: true });
-
-            // Also listen for scroll to skip
-            window.addEventListener('wheel', skip, { passive: true, once: true });
-            window.addEventListener('touchstart', skip, { passive: true, once: true });
-
-            type();
         }
 
-        return { init, finish };
+        return { init };
     })();
 
-    /* ======================================================================
-       STATE MACHINE
-       ====================================================================== */
-    function transitionTo(newState) {
-        if (state.current === newState) return;
-        const prev = state.current;
-        state.current = newState;
-        eventBus.emit('state:change', { from: prev, to: newState });
-    }
-
-    /* ======================================================================
-       TELEMETRY COUNTERS
-       ====================================================================== */
-    const Telemetry = (() => {
-        function animateValue(el, target, duration = 1400) {
+    /* ============================================================
+       COUNT-UP METRICS
+       ============================================================ */
+    const Counters = (() => {
+        function animate(el, target, duration = 1400) {
             if (!el) return;
-
-            const startTime = performance.now();
-            el.classList.add('counting');
+            const start = performance.now();
 
             function frame(now) {
-                const elapsed = now - startTime;
+                const elapsed = now - start;
                 const progress = Math.min(elapsed / duration, 1);
-                // Ease-out cubic
-                const eased = 1 - Math.pow(1 - progress, 3);
+                const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
                 const value = Math.floor(eased * target);
 
                 el.textContent = value;
@@ -192,21 +90,17 @@
                     requestAnimationFrame(frame);
                 } else {
                     el.textContent = target;
-                    el.classList.remove('counting');
                 }
             }
-
             requestAnimationFrame(frame);
         }
 
         function init() {
-            const values = $$('.telem-value');
-            if (!values.length) return;
+            const counters = $$('.count');
+            if (!counters.length) return;
 
             if (state.prefersReducedMotion) {
-                values.forEach(el => {
-                    el.textContent = el.dataset.target || '0';
-                });
+                counters.forEach(el => { el.textContent = el.dataset.target || '0'; });
                 return;
             }
 
@@ -215,48 +109,49 @@
                     if (!entry.isIntersecting) return;
                     const el = entry.target;
                     const target = parseInt(el.dataset.target, 10) || 0;
-                    animateValue(el, target);
+                    animate(el, target);
                     observer.unobserve(el);
                 });
-            }, { threshold: 0.4, rootMargin: '0px 0px -50px 0px' });
+            }, { threshold: 0.4, rootMargin: '0px 0px -40px 0px' });
 
-            values.forEach(el => observer.observe(el));
+            counters.forEach(el => observer.observe(el));
         }
 
         return { init };
     })();
 
-    /* ======================================================================
-       SMOOTH SCROLL
-       ====================================================================== */
+    /* ============================================================
+       SMOOTH SCROLL (anchor links, respects header offset)
+       ============================================================ */
     const SmoothScroll = (() => {
         function init() {
-            $$('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', (e) => {
-                    const href = anchor.getAttribute('href');
-                    if (!href || href === '#') return;
+            const headerEl = $('.site-header');
+            const headerOffset = headerEl ? headerEl.offsetHeight + 20 : 80;
+
+            $$('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href');
+                    if (!href || href === '#' || href === '#top') {
+                        if (href === '#top') {
+                            e.preventDefault();
+                            window.scrollTo({
+                                top: 0,
+                                behavior: state.prefersReducedMotion ? 'auto' : 'smooth'
+                            });
+                        }
+                        return;
+                    }
 
                     const target = document.querySelector(href);
                     if (!target) return;
 
                     e.preventDefault();
-
-                    const headerOffset = 80;
-                    const targetTop = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+                    const top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
 
                     window.scrollTo({
-                        top: targetTop,
+                        top,
                         behavior: state.prefersReducedMotion ? 'auto' : 'smooth'
                     });
-
-                    // Update state based on section
-                    const id = href.slice(1);
-                    if (id === 'contact') transitionTo(STATES.CONTACT);
-                    else if (id === 'case-files' || id.startsWith('case-')) transitionTo(STATES.CASE_FOCUS);
-
-                    // Move focus for accessibility
-                    target.setAttribute('tabindex', '-1');
-                    setTimeout(() => target.focus({ preventScroll: true }), 400);
                 });
             });
         }
@@ -264,154 +159,66 @@
         return { init };
     })();
 
-    /* ======================================================================
-       CASE FILE INTERACTIONS
-       ====================================================================== */
-    const CaseFiles = (() => {
+    /* ============================================================
+       ACTIVE NAV HIGHLIGHT
+       ============================================================ */
+    const ActiveNav = (() => {
         function init() {
-            const files = $$('.case-file');
-            if (!files.length) return;
+            const navLinks = $$('.primary-nav a');
+            if (!navLinks.length) return;
 
-            files.forEach(file => {
-                // Ensure keyboard accessibility
-                if (!file.hasAttribute('tabindex')) file.setAttribute('tabindex', '0');
-                file.setAttribute('role', 'article');
+            const pairs = navLinks
+                .map(link => {
+                    const id = link.getAttribute('href');
+                    if (!id || id === '#top' || id.length < 2) return null;
+                    const section = document.querySelector(id);
+                    return section ? { link, section } : null;
+                })
+                .filter(Boolean);
 
-                file.addEventListener('click', (e) => {
-                    // Don't trigger if user clicked a link or button
-                    if (e.target.closest('a, button')) return;
-                    transitionTo(STATES.CASE_FOCUS);
-                    eventBus.emit('case:focus', { id: file.id });
+            if (!pairs.length) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    const match = pairs.find(p => p.section === entry.target);
+                    if (!match) return;
+                    navLinks.forEach(l => l.style.color = '');
+                    match.link.style.color = 'var(--text-primary)';
                 });
-
-                file.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        file.click();
-                    }
-                });
+            }, {
+                rootMargin: '-45% 0px -45% 0px',
+                threshold: 0
             });
+
+            pairs.forEach(p => observer.observe(p.section));
         }
 
         return { init };
     })();
 
-    /* ======================================================================
-       BANNER CTA
-       ====================================================================== */
-    const Banner = (() => {
-        function init() {
-            const cta = $('#banner-cta');
-            const banner = $('#incident-banner');
-            if (!cta || !banner) return;
-
-            cta.addEventListener('click', () => {
-                const target = $('#case-files');
-                if (!target) return;
-
-                const headerOffset = 80;
-                const targetTop = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: targetTop,
-                    behavior: state.prefersReducedMotion ? 'auto' : 'smooth'
-                });
-
-                transitionTo(STATES.CASE_FOCUS);
-            });
-        }
-
-        return { init };
-    })();
-
-    /* ======================================================================
-       STATUS BAR — CLOCK + SCROLL PROGRESS
-       ====================================================================== */
-    const StatusBar = (() => {
-        let clockEl = null;
-        let progressEl = null;
-        let clockTimer = null;
-        let scrollRaf = null;
-
-        function updateClock() {
-            if (!clockEl) return;
-            const now = new Date();
-            const h = String(now.getHours()).padStart(2, '0');
-            const m = String(now.getMinutes()).padStart(2, '0');
-            const s = String(now.getSeconds()).padStart(2, '0');
-            clockEl.textContent = `SYS_TIME: ${h}:${m}:${s}`;
-        }
-
-        function updateProgress() {
-            if (!progressEl) return;
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = docHeight > 0 ? Math.min(Math.round((scrollTop / docHeight) * 100), 100) : 0;
-            progressEl.textContent = `SCROLL: ${progress}%`;
-            scrollRaf = null;
-        }
-
-        function onScroll() {
-            if (scrollRaf !== null) return;
-            scrollRaf = requestAnimationFrame(updateProgress);
-        }
-
-        function init() {
-            clockEl = $('#live-clock');
-            progressEl = $('#scroll-progress');
-
-            if (clockEl) {
-                updateClock();
-                clockTimer = setInterval(updateClock, 1000);
-            }
-
-            if (progressEl) {
-                updateProgress();
-                window.addEventListener('scroll', onScroll, { passive: true });
-            }
-
-            // Pause clock when tab hidden (performance)
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    if (clockTimer) clearInterval(clockTimer);
-                    clockTimer = null;
-                } else {
-                    if (!clockTimer && clockEl) {
-                        updateClock();
-                        clockTimer = setInterval(updateClock, 1000);
-                    }
-                }
-            });
-        }
-
-        return { init };
-    })();
-
-    /* ======================================================================
-       PARTICLE CANVAS — lightweight, DPR-aware, paused when hidden
-       ====================================================================== */
+    /* ============================================================
+       PARTICLE FIELD — subtle, DPR-aware, paused when hidden
+       ============================================================ */
     const ParticleField = (() => {
-        let canvas = null;
-        let ctx = null;
+        let canvas, ctx;
         let particles = [];
         let rafId = null;
         let running = false;
-        let resizeTimer = null;
 
         const CONFIG = {
-            maxParticles: 40,
-            particleDensity: 30,      // 1 particle per N px of width
-            maxConnectionDist: 120,
-            speed: 0.4,
-            minRadius: 0.5,
-            maxRadius: 2,
-            particleColor: 'rgba(0, 172, 193, 0.35)',
-            lineColor: 'rgba(0, 172, 193, 0.12)'
+            maxCount: 32,
+            density: 34000,       // 1 particle per N px² of viewport
+            maxDistance: 130,
+            speed: 0.28,
+            minRadius: 0.6,
+            maxRadius: 1.7,
+            dotColor: 'rgba(212, 169, 74, 0.28)',
+            lineColor: 'rgba(212, 169, 74, 0.10)'
         };
 
         function resize() {
             if (!canvas || !ctx) return;
-
             const dpr = Math.min(window.devicePixelRatio || 1, 2);
             const w = window.innerWidth;
             const h = window.innerHeight;
@@ -424,10 +231,7 @@
             ctx.setTransform(1, 0, 0, 1, 0, 0);
             ctx.scale(dpr, dpr);
 
-            const count = Math.min(
-                CONFIG.maxParticles,
-                Math.floor(w / CONFIG.particleDensity)
-            );
+            const count = Math.min(CONFIG.maxCount, Math.floor((w * h) / CONFIG.density));
 
             particles = Array.from({ length: count }, () => ({
                 x: Math.random() * w,
@@ -439,50 +243,43 @@
         }
 
         function draw() {
-            if (!ctx || !canvas) return;
-
+            if (!ctx) return;
             const w = window.innerWidth;
             const h = window.innerHeight;
 
             ctx.clearRect(0, 0, w, h);
 
-            // Update + draw particles
             for (let i = 0; i < particles.length; i++) {
                 const p = particles[i];
                 p.x += p.vx;
                 p.y += p.vy;
-
-                // Bounce on edges
                 if (p.x < 0 || p.x > w) p.vx *= -1;
                 if (p.y < 0 || p.y > h) p.vy *= -1;
-
-                // Clamp inside
                 p.x = Math.max(0, Math.min(w, p.x));
                 p.y = Math.max(0, Math.min(h, p.y));
 
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = CONFIG.particleColor;
+                ctx.fillStyle = CONFIG.dotColor;
                 ctx.fill();
             }
 
-            // Draw connections
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     const a = particles[i];
                     const b = particles[j];
                     const dx = a.x - b.x;
                     const dy = a.y - b.y;
-                    const distSq = dx * dx + dy * dy;
-                    const maxSq = CONFIG.maxConnectionDist * CONFIG.maxConnectionDist;
+                    const d2 = dx * dx + dy * dy;
+                    const maxD2 = CONFIG.maxDistance * CONFIG.maxDistance;
 
-                    if (distSq < maxSq) {
-                        const dist = Math.sqrt(distSq);
-                        const alpha = 0.12 * (1 - dist / CONFIG.maxConnectionDist);
+                    if (d2 < maxD2) {
+                        const dist = Math.sqrt(d2);
+                        const alpha = 0.10 * (1 - dist / CONFIG.maxDistance);
                         ctx.beginPath();
                         ctx.moveTo(a.x, a.y);
                         ctx.lineTo(b.x, b.y);
-                        ctx.strokeStyle = `rgba(0, 172, 193, ${alpha})`;
+                        ctx.strokeStyle = `rgba(212, 169, 74, ${alpha})`;
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
@@ -500,17 +297,14 @@
 
         function stop() {
             running = false;
-            if (rafId) {
-                cancelAnimationFrame(rafId);
-                rafId = null;
-            }
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = null;
         }
 
+        let resizeTimer = null;
         function onResize() {
             clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                resize();
-            }, 150);
+            resizeTimer = setTimeout(resize, 150);
         }
 
         function onVisibility() {
@@ -520,14 +314,9 @@
 
         function init() {
             canvas = $('#particle-canvas');
-
-            // Bail on unsupported / disabled environments
             if (!canvas) return;
-            if (state.prefersReducedMotion) {
-                canvas.style.display = 'none';
-                return;
-            }
-            if (state.isMobile) {
+
+            if (state.prefersReducedMotion || state.isMobile) {
                 canvas.style.display = 'none';
                 return;
             }
@@ -540,7 +329,6 @@
 
             resize();
             start();
-
             window.addEventListener('resize', onResize, { passive: true });
             document.addEventListener('visibilitychange', onVisibility);
         }
@@ -554,98 +342,57 @@
         return { init, destroy };
     })();
 
-    /* ======================================================================
-       ACTIVE SECTION HIGHLIGHT (Optional — highlights nav link)
-       ====================================================================== */
-    const ActiveNav = (() => {
-        function init() {
-            const navLinks = $$('.nav-links a');
-            if (!navLinks.length) return;
+    /* ============================================================
+       FOOTER YEAR
+       ============================================================ */
+    function setYear() {
+        const el = $('#footer-year');
+        if (el) el.textContent = String(new Date().getFullYear());
+    }
 
-            const sections = navLinks
-                .map(link => {
-                    const id = link.getAttribute('href');
-                    if (!id || id === '#') return null;
-                    const el = document.querySelector(id);
-                    return el ? { link, section: el } : null;
-                })
-                .filter(Boolean);
-
-            if (!sections.length) return;
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    const match = sections.find(s => s.section === entry.target);
-                    if (!match) return;
-
-                    if (entry.isIntersecting) {
-                        navLinks.forEach(l => l.style.color = '');
-                        match.link.style.color = 'var(--cyan)';
-                    }
-                });
-            }, {
-                rootMargin: '-40% 0px -40% 0px',
-                threshold: 0
-            });
-
-            sections.forEach(s => observer.observe(s.section));
-        }
-
-        return { init };
-    })();
-
-    /* ======================================================================
-       GLOBAL ERROR HANDLER — never crash silently
-       ====================================================================== */
+    /* ============================================================
+       GLOBAL ERROR GUARD
+       ============================================================ */
     window.addEventListener('error', (e) => {
-        console.error('[Portfolio Error]', e.message, e.filename, e.lineno);
+        console.error('[Portfolio] Runtime error:', e.message);
     });
-
     window.addEventListener('unhandledrejection', (e) => {
-        console.error('[Unhandled Promise]', e.reason);
+        console.error('[Portfolio] Unhandled promise:', e.reason);
     });
 
-    /* ======================================================================
+    /* ============================================================
        BOOTSTRAP
-       ====================================================================== */
+       ============================================================ */
     onReady(() => {
-        // Init modules in order
-        BootSequence.init();
-        Telemetry.init();
+        Theme.init();
+        Counters.init();
         SmoothScroll.init();
-        CaseFiles.init();
-        Banner.init();
-        StatusBar.init();
-        ParticleField.init();
         ActiveNav.init();
-
-        // Fire ready event for potential extensions
-        eventBus.emit('app:ready', { state });
-
-        // Log state changes (useful for debugging)
-        eventBus.on('state:change', ({ from, to }) => {
-            // Uncomment for debugging:
-            // console.log(`[State] ${from} → ${to}`);
-        });
+        ParticleField.init();
+        setYear();
     });
 
-    /* ======================================================================
-       HANDLE ORIENTATION / BREAKPOINT CHANGES
-       ====================================================================== */
+    /* ============================================================
+       BREAKPOINT / ORIENTATION HANDLING
+       ============================================================ */
+    let resizeRaf = null;
     window.addEventListener('resize', () => {
-        const nowMobile = window.innerWidth <= 860;
-        if (nowMobile !== state.isMobile) {
-            state.isMobile = nowMobile;
-
-            const canvas = $('#particle-canvas');
-            if (nowMobile) {
-                ParticleField.destroy();
-                if (canvas) canvas.style.display = 'none';
-            } else if (!state.prefersReducedMotion) {
-                if (canvas) canvas.style.display = 'block';
-                ParticleField.init();
+        if (resizeRaf !== null) return;
+        resizeRaf = requestAnimationFrame(() => {
+            const nowMobile = window.innerWidth <= 900;
+            if (nowMobile !== state.isMobile) {
+                state.isMobile = nowMobile;
+                const canvas = $('#particle-canvas');
+                if (nowMobile) {
+                    ParticleField.destroy();
+                    if (canvas) canvas.style.display = 'none';
+                } else if (!state.prefersReducedMotion) {
+                    if (canvas) canvas.style.display = 'block';
+                    ParticleField.init();
+                }
             }
-        }
+            resizeRaf = null;
+        });
     }, { passive: true });
 
 })();
