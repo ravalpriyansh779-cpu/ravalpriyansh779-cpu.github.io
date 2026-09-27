@@ -1,85 +1,108 @@
 /* ============================================================
-   PHOSPHOR WORKBENCH — Balanced Color System
-   OKLCH-built. Light and dark are independently designed.
+   PHOSPHOR LAB — Priyansh Raval Portfolio
+   OKLCH-built. Hex values are computed outputs.
+   Light mode is a designed counterpart, not an inversion.
    ============================================================ */
 
 :root {
   /* ---------------- SURFACES (dark, cool-shifted) ---------------- */
-  --bg-0: #0f1419;              /* oklch(0.16 0.015 240) — page base */
-  --bg-1: #161c22;              /* oklch(0.22 0.015 240) — cards */
-  --bg-2: #1e262e;              /* oklch(0.28 0.015 240) — elevated panels */
-  --bg-3: #273039;              /* oklch(0.34 0.015 240) — tooltips, modals */
+  --bg-0: #0a1014;              /* oklch(0.15 0.010 220) — page base */
+  --bg-1: #111a20;              /* oklch(0.22 0.012 220) — cards */
+  --bg-2: #19242c;              /* oklch(0.28 0.014 220) — elevated panels */
+  --bg-3: #223039;              /* oklch(0.34 0.014 220) — tooltips, popovers */
 
   /* ---------------- CONTENT ---------------- */
-  --text-primary:   #e6edf3;    /* oklch(0.94 0.010 240) — headlines, body */
-  --text-secondary: #9aa8b3;    /* oklch(0.72 0.015 240) — supporting text */
-  --text-muted:     #6e7d89;    /* oklch(0.58 0.015 240) — meta, labels */
-  --text-inverse:   #0f1419;    /* used on accent fills */
+  --text-primary:   #f0f4f6;    /* oklch(0.96 0.005 220) — headlines, body */
+  --text-secondary: #a4afb6;    /* oklch(0.72 0.010 220) — supporting text */
+  --text-muted:     #7f8c95;    /* oklch(0.62 0.010 220) — meta, labels */
+  --text-dim:       #5e6d78;    /* oklch(0.52 0.010 220) — large-only, disabled */
+  --text-inverse:   #0a1014;    /* used on cyan/amber fills */
 
   /* ---------------- BORDERS ---------------- */
-  --border-subtle:  #1a222a;
-  --border-default: #263038;
-  --border-strong:  #38444e;
-  --border-focus:   #d4a94a;    /* amber — focus rings */
+  --border-subtle:  #1a242c;    /* oklch(0.24 0.012 220) — dividers */
+  --border-default: #243039;    /* oklch(0.30 0.014 220) — card outlines */
+  --border-strong:  #344049;    /* oklch(0.38 0.014 220) — focused cards */
+  --border-signal:  #1f97ad;    /* brand-500 — active element */
 
-  /* ---------------- BRAND RAMP — COOL SLATE-BLUE (H≈240) ------------- */
-  --brand-50:  #eef2f7;
-  --brand-100: #d6e0ea;
-  --brand-200: #aebfd0;
-  --brand-300: #859db3;
-  --brand-400: #5d7d96;
-  --brand-500: #3d5f7a;         /* PRIMARY */
-  --brand-600: #2f4b61;
-  --brand-700: #233849;
-  --brand-800: #1a2a37;
-  --brand-900: #121c25;
-  --brand-950: #0b1218;
+  /* ---------------- BRAND RAMP — PHOSPHOR CYAN (H≈200) ------------- */
+  --brand-50:  #e8f7fa;         /* oklch(0.97 0.020 200) */
+  --brand-100: #cdeef3;         /* oklch(0.94 0.040 200) */
+  --brand-200: #9adbe4;         /* oklch(0.88 0.070 200) */
+  --brand-300: #5dc3d1;         /* oklch(0.80 0.110 200) */
+  --brand-400: #34aabd;         /* oklch(0.72 0.140 200) */
+  --brand-500: #1f97ad;         /* oklch(0.65 0.150 200) — PRIMARY */
+  --brand-600: #167a8e;         /* oklch(0.55 0.130 200) */
+  --brand-700: #0f5e6f;         /* oklch(0.45 0.110 200) */
+  --brand-800: #0a4453;         /* oklch(0.35 0.080 200) */
+  --brand-900: #062d38;         /* oklch(0.25 0.050 200) */
+  --brand-950: #041b22;         /* oklch(0.18 0.030 200) */
 
-  /* ---------------- ACCENT — SIGNAL AMBER (H≈80) --------------- */
-  --accent-400: #e8c96a;
-  --accent-500: #d4a94a;        /* SIGNAL — focus, CTA, active */
-  --accent-600: #b5862e;
-  --accent-700: #8f661f;
+  /* ---------------- ACCENT RAMP — SIGNAL AMBER (H≈80) --------------- */
+  --accent-300: #f0d98a;        /* oklch(0.88 0.10 85) */
+  --accent-400: #e8c96a;        /* oklch(0.85 0.14 82) */
+  --accent-500: #d4a94a;        /* oklch(0.78 0.15 80) — SIGNAL */
+  --accent-600: #b5862e;        /* oklch(0.68 0.14 78) */
+  --accent-700: #8f661f;        /* oklch(0.55 0.12 75) */
+
+  /* ---------------- SIGNATURE — ELECTRIC MAGENTA (H≈350) ------------ */
+  --signature: #e8317f;         /* oklch(0.65 0.28 350) — 3 uses only */
+  --signature-glow: rgba(232, 49, 127, 0.35);
 
   /* ---------------- SEMANTIC — DARK MODE ---------------- */
-  --success-500: #2fb87d;
-  --warning-500: #e0a83b;
-  --danger-500:  #d94361;
-  --info-500:    #4a9ae0;
+  --success-500: #2fb87d;       /* oklch(0.72 0.14 160) */
+  --success-600: #1f8f5f;
+  --warning-500: #e0a83b;       /* oklch(0.80 0.14 75) */
+  --warning-600: #b5862e;
+  --danger-500:  #d94361;       /* oklch(0.62 0.20 15) */
+  --danger-600:  #b02e4a;
+  --info-500:    #4a9ae0;       /* oklch(0.68 0.14 240) */
+  --info-600:    #2f7bbd;
 
   /* ---------------- STATE OVERLAYS ---------------- */
-  --overlay-hover:   rgba(61, 95, 122, 0.10);
-  --overlay-active:  rgba(61, 95, 122, 0.18);
-  --overlay-focus:   rgba(212, 169, 74, 0.25);
+  --overlay-hover:   rgba(31, 151, 173, 0.08);   /* brand tint */
+  --overlay-active:  rgba(31, 151, 173, 0.16);
+  --overlay-focus:   rgba(212, 169, 74, 0.25);   /* amber focus halo */
+  --overlay-scrim:   rgba(0, 0, 0, 0.72);
+
+  /* ---------------- MOTION ---------------- */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:    150ms;
+  --dur-base:    220ms;
+  --dur-slow:    400ms;
 }
 
 /* ============================================================
    LIGHT MODE — independently designed
-   Warm neutrals (H≈80), cool content (H≈240), darker accents
+   Warm neutrals (H≈80), cool content (H≈220), darker brand
    ============================================================ */
 [data-theme="light"] {
-  --bg-0: #f7f6f3;              /* oklch(0.97 0.008 80) — warm paper */
-  --bg-1: #f0ede6;              /* oklch(0.94 0.010 80) */
-  --bg-2: #e8e3d8;              /* oklch(0.90 0.014 80) */
-  --bg-3: #ddd7c9;              /* oklch(0.86 0.016 80) */
+  --bg-0: #faf7f0;              /* oklch(0.98 0.008 80) — warm off-white */
+  --bg-1: #f2eee3;              /* oklch(0.955 0.010 80) */
+  --bg-2: #e9e3d4;              /* oklch(0.92 0.014 80) */
+  --bg-3: #ddd5c2;              /* oklch(0.88 0.018 80) */
 
-  --text-primary:   #1a1f24;    /* oklch(0.18 0.015 240) */
-  --text-secondary: #4a545e;    /* oklch(0.42 0.015 240) */
-  --text-muted:     #6e7d89;    /* oklch(0.58 0.015 240) */
+  --text-primary:   #0d1418;    /* oklch(0.18 0.015 220) */
+  --text-secondary: #3d4a54;    /* oklch(0.42 0.015 220) */
+  --text-muted:     #5a6670;    /* oklch(0.55 0.012 220) */
+  --text-dim:       #7d8993;
+  --text-inverse:   #faf7f0;
 
-  --border-subtle:  #e4dfd4;
-  --border-default: #d0c9b8;
+  --border-subtle:  #e0d9c9;
+  --border-default: #cbc2ae;
   --border-strong:  #a89e88;
-  --border-focus:   #a06e1c;    /* darker amber for light bg */
+  --border-signal:  #0d7d92;    /* darker brand for light mode */
 
-  /* Brand shifts darker in light mode */
-  --brand-500: #2f4b61;
-  --brand-600: #233849;
+  /* Brand shifts darker in light mode to keep contrast */
+  --brand-500: #0d7d92;         /* oklch(0.50 0.140 200) */
+  --brand-600: #0a6474;
+  --brand-700: #084d5a;
 
-  --accent-500: #a06e1c;        /* oklch(0.52 0.14 75) */
-  --accent-600: #8f661f;
+  --accent-500: #a06e1c;        /* oklch(0.52 0.140 75) */
+  --signature:  #c11a63;        /* oklch(0.52 0.240 350) */
 
-  --overlay-hover:  rgba(47, 75, 97, 0.06);
-  --overlay-active: rgba(47, 75, 97, 0.12);
+  --overlay-hover:  rgba(13, 125, 146, 0.06);
+  --overlay-active: rgba(13, 125, 146, 0.12);
   --overlay-focus:  rgba(160, 110, 28, 0.25);
+  --overlay-scrim:  rgba(20, 30, 35, 0.55);
 }
