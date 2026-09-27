@@ -1,372 +1,423 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRIYANSH RAVAL // SYSTEM OPERATOR</title>
-    <meta name="description" content="Portfolio of Priyansh Raval, Full-Stack Software Engineer. Open to SWE intern & full-time roles.">
-    <!-- Google Fonts -->
+    <title>Priyansh Raval — Full-Stack Software Engineer</title>
+    <meta name="description" content="Portfolio of Priyansh Raval, Full-Stack Software Engineer. Open to SWE intern & full-time roles. Building scalable backends, real-time systems, and AI-native applications.">
+    <meta name="author" content="Priyansh Raval">
+    <meta name="theme-color" content="#0f1419">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Priyansh Raval — Full-Stack Software Engineer">
+    <meta property="og:description" content="Building scalable backends, real-time systems, and AI-native applications.">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Link to your CSS file -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Textures & Canvas -->
+
+    <!-- ============ CANVAS + TEXTURE ============ -->
     <canvas id="particle-canvas" aria-hidden="true"></canvas>
     <div class="texture-overlay" aria-hidden="true"></div>
 
-    <!-- Boot Sequence -->
-    <div id="boot-overlay" class="boot-overlay" aria-hidden="true">
-        <div class="boot-log" id="boot-log"></div>
-        <div class="boot-skip">CLICK OR PRESS ANY KEY TO SKIP</div>
-    </div>
+    <!-- ============ THEME TOGGLE ============ -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme" title="Toggle light / dark mode">
+        <span class="theme-icon theme-icon--dark" aria-hidden="true">◐</span>
+        <span class="theme-icon theme-icon--light" aria-hidden="true">◑</span>
+    </button>
 
-    <!-- Incident Banner -->
-    <div id="incident-banner" class="incident-banner" role="status">
-        <span class="glyph">⚠</span> RECRUITMENT WINDOW ACTIVE — SWE INTERN & FULL-TIME ROLES
-        <button id="banner-cta" class="banner-cta">ACKNOWLEDGE → VIEW CASE FILES</button>
-    </div>
+    <!-- ============ NAVIGATION ============ -->
+    <header class="site-header" role="banner">
+        <div class="header-inner">
+            <a href="#top" class="brand" aria-label="Priyansh Raval — home">
+                <span class="brand-mark" aria-hidden="true">◈</span>
+                <span class="brand-text">Priyansh Raval</span>
+            </a>
 
-    <!-- Navigation -->
-    <header class="nav-header">
-        <div class="nav-brand">
-            <span class="glyph">◈</span> PRIYANSH RAVAL
-        </div>
-        <nav class="nav-links" aria-label="Main Navigation">
-            <a href="#case-files">CASE FILES</a>
-            <a href="#field-report">FIELD REPORT</a>
-            <a href="#stack">STACK</a>
-            <a href="#contact">CONTACT</a>
-        </nav>
-        <div class="nav-actions">
-            <a href="https://github.com/ravalpriyansh779-cpu" target="_blank" rel="noopener" class="btn-nav">GITHUB</a>
-            <a href="https://www.linkedin.com/in/priyansh-raval-3a98b7366" target="_blank" rel="noopener" class="btn-nav">LINKEDIN</a>
+            <nav class="primary-nav" aria-label="Primary navigation">
+                <a href="#work">Work</a>
+                <a href="#experience">Experience</a>
+                <a href="#stack">Stack</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="https://github.com/ravalpriyansh779-cpu" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" aria-label="GitHub profile">GitHub</a>
+                <a href="https://www.linkedin.com/in/priyansh-raval-3a98b7366/" target="_blank" rel="noopener noreferrer" class="btn btn--primary" aria-label="LinkedIn profile">LinkedIn</a>
+            </div>
         </div>
     </header>
 
-    <main>
-        <!-- HERO SECTION -->
-        <section id="hero" class="hero-section">
-            <div class="hero-content">
-                <div class="eyebrow"><span class="glyph">◈</span> SYSTEM OPERATOR // PDEU-07</div>
-                <h1 class="hero-title">Full-Stack Software Engineer</h1>
-                <p class="hero-subtitle">I own features from whiteboard to production. Specializing in scalable backends, real-time systems, and AI-native applications.</p>
-                
-                <div class="hero-ctas">
-                    <a href="#case-files" class="btn-primary">VIEW CASE FILES</a>
-                    <a href="mailto:23bit084@sot.pdpu.ac.in" class="btn-secondary">CONTACT</a>
+    <main id="top">
+
+        <!-- ============ HERO ============ -->
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <p class="hero-eyebrow">
+                        <span class="status-dot" aria-hidden="true"></span>
+                        Available for software engineering roles
+                    </p>
+                    <h1 id="hero-title" class="hero-title">
+                        Building systems that <span class="hero-emphasis">hold up in production</span>.
+                    </h1>
+                    <p class="hero-lead">
+                        Full-stack software engineer focused on scalable backends, real-time
+                        collaboration, and AI-native applications. I take features from
+                        whiteboard to production — and I care about what happens after.
+                    </p>
+                    <div class="hero-ctas">
+                        <a href="#work" class="btn btn--primary">View work</a>
+                        <a href="#contact" class="btn btn--secondary">Get in touch</a>
+                    </div>
                 </div>
 
-                <div class="trust-badges">
-                    <span class="badge">SDE Intern @ SITESEW</span>
-                    <span class="badge">40% latency ↓</span>
-                    <span class="badge">77% faster deploys</span>
-                    <span class="badge">Published @ ICAWTM-26</span>
-                </div>
-            </div>
-
-            <!-- Telemetry Panel -->
-            <div class="telemetry-panel" aria-label="System Telemetry">
-                <div class="telemetry-header"><span class="glyph">⌁</span> LIVE TELEMETRY</div>
-                <div class="telemetry-grid">
-                    <div class="telemetry-item">
-                        <div class="telem-label">LATENCY REDUCTION</div>
-                        <div class="telem-value" data-target="40">0</div>
-                        <div class="telem-unit">%</div>
+                <aside class="hero-panel" aria-label="At a glance">
+                    <div class="panel-header">
+                        <span class="panel-dot" aria-hidden="true"></span>
+                        <span>At a glance</span>
                     </div>
-                    <div class="telemetry-item">
-                        <div class="telem-label">DEPLOY TIME SAVED</div>
-                        <div class="telem-value" data-target="77">0</div>
-                        <div class="telem-unit">%</div>
-                    </div>
-                    <div class="telemetry-item">
-                        <div class="telem-label">DEPLOY TIME (MIN)</div>
-                        <div class="telem-value" data-target="45">0</div>
-                        <div class="telem-unit">→ 10</div>
-                    </div>
-                    <div class="telemetry-item">
-                        <div class="telem-label">SYSTEMS SHIPPED</div>
-                        <div class="telem-value" data-target="3">0</div>
-                        <div class="telem-unit">units</div>
-                    </div>
-                </div>
+                    <dl class="panel-grid">
+                        <div class="panel-item">
+                            <dt>Latency</dt>
+                            <dd><span class="count" data-target="40">0</span><span class="unit">%</span><span class="panel-note">reduced</span></dd>
+                        </div>
+                        <div class="panel-item">
+                            <dt>Deploy time</dt>
+                            <dd><span class="count" data-target="77">0</span><span class="unit">%</span><span class="panel-note">faster</span></dd>
+                        </div>
+                        <div class="panel-item">
+                            <dt>Shipped</dt>
+                            <dd><span class="count" data-target="3">0</span><span class="unit"></span><span class="panel-note">systems</span></dd>
+                        </div>
+                        <div class="panel-item">
+                            <dt>Published</dt>
+                            <dd><span class="count" data-target="1">0</span><span class="unit"></span><span class="panel-note">paper</span></dd>
+                        </div>
+                    </dl>
+                </aside>
             </div>
         </section>
 
-        <!-- CASE FILES SECTION -->
-        <section id="case-files" class="section">
-            <h2 class="section-title"><span class="glyph">◉</span> CASE FILES</h2>
-            
-            <!-- CASE FILE 01 -->
-            <article class="case-file" id="case-01" tabindex="0">
-                <header class="case-header">
-                    <h3>CASE FILE 01 // PULSEBOARD</h3>
-                    <span class="status-chip">ACTIVE</span>
-                </header>
-                <p class="case-problem"><strong>PROBLEM:</strong> Multi-user board edits caused refresh conflicts and lost updates.</p>
-                
-                <pre class="ascii-diagram" aria-label="Architecture Diagram">
- CLIENT <-- WebSocket --> SERVER <-- SQL --> DB
-   |                        |
-   +-- Optimistic UI        +-- Socket.IO Rooms
-                </pre>
+        <!-- ============ WORK / CASE FILES ============ -->
+        <section id="work" class="section" aria-labelledby="work-title">
+            <header class="section-header">
+                <p class="section-eyebrow">Selected work</p>
+                <h2 id="work-title" class="section-title">Three systems, three problems</h2>
+                <p class="section-lead">
+                    Every project below shipped to production. Each one taught me something
+                    I carry into the next.
+                </p>
+            </header>
 
-                <div class="case-body">
-                    <div class="case-details">
-                        <h4>I OWNED</h4>
-                        <ul>
-                            <li>Optimistic UI & last-write-wins conflict resolution</li>
-                            <li>Board-scoped Socket.IO rooms</li>
-                            <li>RBAC schema with fractional card positioning</li>
+            <!-- PROJECT 01 -->
+            <article class="project" aria-labelledby="proj-01-title">
+                <div class="project-header">
+                    <div class="project-index" aria-hidden="true">01</div>
+                    <div class="project-heading">
+                        <h3 id="proj-01-title" class="project-title">CampusLens</h3>
+                        <p class="project-subtitle">Multi-tenant RAG platform for institutional knowledge</p>
+                    </div>
+                    <span class="project-tag">AI / RAG</span>
+                </div>
+
+                <div class="project-body">
+                    <div class="project-column">
+                        <h4 class="project-label">The problem</h4>
+                        <p>One application, many organizations. Each tenant must see only its own documents, and answers must be verifiable — never hallucinated.</p>
+                    </div>
+                    <div class="project-column">
+                        <h4 class="project-label">What I built</h4>
+                        <ul class="project-list">
+                            <li>Tenant-isolated ingestion pipeline: chunk → embed → upsert</li>
+                            <li>Per-tenant Pinecone namespaces with JWT tenant claims</li>
+                            <li>Repository-layer tenant enforcement; citation-grounded prompts</li>
                         </ul>
                     </div>
-                    <div class="case-impact">
-                        <h4>IMPACT</h4>
-                        <div class="impact-meter">
-                            <span>SYNC SPEED: SUB-SECOND</span>
-                            <span class="meter-bar">██████████</span>
-                        </div>
-                        <div class="impact-meter">
-                            <span>LOST UPDATES: ZERO</span>
-                            <span class="meter-bar">██████████</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="case-footer">
-                    <div class="tech-chips">
-                        <span class="chip" title="Frontend library">React</span>
-                        <span class="chip" title="Typed JavaScript">TypeScript</span>
-                        <span class="chip" title="Node.js server framework">Express</span>
-                        <span class="chip" title="Real-time bidirectional event-based communication">Socket.IO</span>
-                        <span class="chip" title="Relational database">PostgreSQL</span>
-                    </div>
-                    <a href="https://github.com/ravalpriyansh779-cpu/pulseboard" target="_blank" rel="noopener" class="btn-case">VIEW CODE</a>
-                </div>
-            </article>
-
-            <!-- CASE FILE 02 -->
-            <article class="case-file" id="case-02" tabindex="0">
-                <header class="case-header">
-                    <h3>CASE FILE 02 // TASKFORGE</h3>
-                    <span class="status-chip">LIVE</span>
-                </header>
-                <p class="case-problem"><strong>PROBLEM:</strong> An AI assistant inside a dashboard must never outrank its human user.</p>
-                
-                <pre class="ascii-diagram" aria-label="Architecture Diagram">
- CLIENT <-- JWT --> API <-- RBAC --> DB
-   |                  |
-   +-- React          +-- Audit Logs
-                </pre>
-
-                <div class="case-body">
-                    <div class="case-details">
-                        <h4>I OWNED</h4>
-                        <ul>
-                            <li>JWT + refresh rotation & route-level authorization</li>
-                            <li>Admin/Operator/Viewer permission matrix</li>
-                            <li>Full audit logging & env-based secrets</li>
+                    <div class="project-column">
+                        <h4 class="project-label">The result</h4>
+                        <ul class="project-list">
+                            <li>Hard tenant isolation — no cross-tenant leakage possible</li>
+                            <li>Answers grounded in cited source documents</li>
+                            <li>SQL and vector store working in a single transaction flow</li>
                         </ul>
                     </div>
-                    <div class="case-impact">
-                        <h4>IMPACT</h4>
-                        <div class="impact-meter">
-                            <span>PERMISSION ESCAPES: 0</span>
-                            <span class="meter-bar">██████████</span>
-                        </div>
-                        <div class="impact-meter">
-                            <span>AGENT ACTIONS AUDITED: 100%</span>
-                            <span class="meter-bar">██████████</span>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="case-footer">
-                    <div class="tech-chips">
-                        <span class="chip" title="Frontend library">React</span>
-                        <span class="chip" title="Typed JavaScript">TypeScript</span>
-                        <span class="chip" title="Node.js server framework">Express</span>
-                        <span class="chip" title="Containerization platform">Docker</span>
-                        <span class="chip" title="Relational database">PostgreSQL</span>
-                    </div>
-                    <div class="case-links">
-                        <a href="https://github.com/ravalpriyansh779-cpu/TaskForge-" target="_blank" rel="noopener" class="btn-case">VIEW CODE</a>
-                        <a href="https://task-forge-two-sigma.vercel.app" target="_blank" rel="noopener" class="btn-case live">LIVE DEMO</a>
+                <div class="project-footer">
+                    <ul class="chip-row" aria-label="Technologies used">
+                        <li class="chip">Python</li>
+                        <li class="chip">FastAPI</li>
+                        <li class="chip">React</li>
+                        <li class="chip">PostgreSQL</li>
+                        <li class="chip">Pinecone</li>
+                        <li class="chip">LangChain</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="https://github.com/ravalpriyansh779-cpu/CampusLens" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--small">View source</a>
                     </div>
                 </div>
             </article>
 
-            <!-- CASE FILE 03 -->
-            <article class="case-file" id="case-03" tabindex="0">
-                <header class="case-header">
-                    <h3>CASE FILE 03 // CAMPUSLENS</h3>
-                    <span class="status-chip">RESEARCH</span>
-                </header>
-                <p class="case-problem"><strong>PROBLEM:</strong> One app, many organizations; each must see only its own documents, and answers must be verifiable.</p>
-                
-                <pre class="ascii-diagram" aria-label="Architecture Diagram">
- CLIENT <-- REST --> API <-- LangChain --> VECTOR DB
-   |                  |
-   +-- React          +-- Pinecone Namespaces
-                </pre>
+            <!-- PROJECT 02 -->
+            <article class="project" aria-labelledby="proj-02-title">
+                <div class="project-header">
+                    <div class="project-index" aria-hidden="true">02</div>
+                    <div class="project-heading">
+                        <h3 id="proj-02-title" class="project-title">TaskForge</h3>
+                        <p class="project-subtitle">AI operations dashboard with a human-first permission model</p>
+                    </div>
+                    <span class="project-tag">Security / AI</span>
+                </div>
 
-                <div class="case-body">
-                    <div class="case-details">
-                        <h4>I OWNED</h4>
-                        <ul>
-                            <li>Tenant-isolated ingestion (chunk → embed → upsert)</li>
-                            <li>Per-tenant Pinecone namespaces & JWT tenant claim</li>
-                            <li>Citation-grounded source-constrained prompts</li>
+                <div class="project-body">
+                    <div class="project-column">
+                        <h4 class="project-label">The problem</h4>
+                        <p>An AI assistant embedded in a dashboard must never outrank its human user. Every agent action needs to be attributable, scoped, and reversible.</p>
+                    </div>
+                    <div class="project-column">
+                        <h4 class="project-label">What I built</h4>
+                        <ul class="project-list">
+                            <li>JWT authentication with refresh rotation and route-level authorization</li>
+                            <li>Admin / Operator / Viewer permission matrix enforced server-side</li>
+                            <li>Audit log for every agent tool-call, with environment-scoped secrets</li>
                         </ul>
                     </div>
-                    <div class="case-impact">
-                        <h4>IMPACT</h4>
-                        <div class="impact-meter">
-                            <span>TENANT ISOLATION: HARD</span>
-                            <span class="meter-bar">██████████</span>
-                        </div>
-                        <div class="impact-meter">
-                            <span>HALLUCINATION RATE: MINIMIZED</span>
-                            <span class="meter-bar">████████░░</span>
-                        </div>
+                    <div class="project-column">
+                        <h4 class="project-label">The result</h4>
+                        <ul class="project-list">
+                            <li>Zero permission escapes across all tested role combinations</li>
+                            <li>100% of agent actions traceable to an actor and timestamp</li>
+                            <li>Containerized deployment — reproducible across environments</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="case-footer">
-                    <div class="tech-chips">
-                        <span class="chip" title="Programming language">Python</span>
-                        <span class="chip" title="Modern web framework for APIs">FastAPI</span>
-                        <span class="chip" title="Frontend library">React</span>
-                        <span class="chip" title="Relational database">PostgreSQL</span>
-                        <span class="chip" title="Vector database for semantic search">Pinecone</span>
-                        <span class="chip" title="Framework for LLM applications">LangChain</span>
+                <div class="project-footer">
+                    <ul class="chip-row" aria-label="Technologies used">
+                        <li class="chip">React</li>
+                        <li class="chip">TypeScript</li>
+                        <li class="chip">Node.js</li>
+                        <li class="chip">Express</li>
+                        <li class="chip">Docker</li>
+                        <li class="chip">PostgreSQL</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="https://github.com/ravalpriyansh779-cpu/TaskForge-" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--small">View source</a>
                     </div>
-                    <a href="https://github.com/ravalpriyansh779-cpu/CampusLens" target="_blank" rel="noopener" class="btn-case">VIEW CODE</a>
                 </div>
             </article>
+
+            <!-- PROJECT 03 -->
+            <article class="project" aria-labelledby="proj-03-title">
+                <div class="project-header">
+                    <div class="project-index" aria-hidden="true">03</div>
+                    <div class="project-heading">
+                        <h3 id="proj-03-title" class="project-title">PulseBoard</h3>
+                        <p class="project-subtitle">Real-time collaborative Kanban with conflict resolution</p>
+                    </div>
+                    <span class="project-tag">Realtime</span>
+                </div>
+
+                <div class="project-body">
+                    <div class="project-column">
+                        <h4 class="project-label">The problem</h4>
+                        <p>Multiple users editing the same board caused refresh conflicts and lost updates. Standard polling was too slow and too heavy.</p>
+                    </div>
+                    <div class="project-column">
+                        <h4 class="project-label">What I built</h4>
+                        <ul class="project-list">
+                            <li>Optimistic UI with last-write-wins conflict resolution</li>
+                            <li>Board-scoped Socket.IO rooms for targeted event broadcast</li>
+                            <li>RBAC schema with fractional card positioning for reorder stability</li>
+                        </ul>
+                    </div>
+                    <div class="project-column">
+                        <h4 class="project-label">The result</h4>
+                        <ul class="project-list">
+                            <li>Sub-second sync across distributed clients</li>
+                            <li>Zero lost-update reports during testing</li>
+                            <li>Drag-to-reorder remains stable under concurrent edits</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-footer">
+                    <ul class="chip-row" aria-label="Technologies used">
+                        <li class="chip">React</li>
+                        <li class="chip">TypeScript</li>
+                        <li class="chip">Node.js</li>
+                        <li class="chip">Socket.IO</li>
+                        <li class="chip">PostgreSQL</li>
+                    </ul>
+                    <div class="project-links">
+                        <a href="https://github.com/ravalpriyansh779-cpu/pulseboard" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--small">View source</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- RESEARCH NOTE -->
+            <article class="project project--research" aria-labelledby="proj-04-title">
+                <div class="project-header">
+                    <div class="project-index" aria-hidden="true">04</div>
+                    <div class="project-heading">
+                        <h3 id="proj-04-title" class="project-title">ML-Driven Energy Optimization</h3>
+                        <p class="project-subtitle">Published research — ICAWTM-26 (February 2026)</p>
+                    </div>
+                    <span class="project-tag">Research</span>
+                </div>
+
+                <div class="project-body">
+                    <div class="project-column project-column--wide">
+                        <h4 class="project-label">The work</h4>
+                        <p>
+                            Applied machine learning to optimize energy consumption across
+                            operational parameters in smart wastewater treatment. The model
+                            output was translated into actionable sustainable-design
+                            recommendations for facility operators.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="project-footer">
+                    <ul class="chip-row" aria-label="Technologies used">
+                        <li class="chip">Python</li>
+                        <li class="chip">Machine Learning</li>
+                        <li class="chip">Predictive Modeling</li>
+                    </ul>
+                </div>
+            </article>
+
         </section>
 
-        <!-- FIELD REPORT SECTION -->
-        <section id="field-report" class="section">
-            <h2 class="section-title"><span class="glyph">⬡</span> FIELD REPORT</h2>
-            <div class="report-card">
-                <header class="report-header">
-                    <h3>SITESEW // SDE INTERN</h3>
-                    <span class="status-chip">MAY–JUL 2026</span>
-                </header>
-                <div class="report-grid">
-                    <div class="report-metric">
+        <!-- ============ EXPERIENCE ============ -->
+        <section id="experience" class="section" aria-labelledby="exp-title">
+            <header class="section-header">
+                <p class="section-eyebrow">Experience</p>
+                <h2 id="exp-title" class="section-title">Where I've shipped</h2>
+            </header>
+
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="experience-role">Software Developer Intern</h3>
+                        <p class="experience-company">SITESEW — IT Products &amp; Services</p>
+                    </div>
+                    <span class="experience-date">May – Jul 2026</span>
+                </div>
+
+                <div class="metrics-row">
+                    <div class="metric">
                         <div class="metric-value">40%</div>
-                        <div class="metric-label">p95 API LATENCY REDUCED</div>
+                        <div class="metric-label">p95 API latency reduced</div>
                     </div>
-                    <div class="report-metric">
+                    <div class="metric">
                         <div class="metric-value">77%</div>
-                        <div class="metric-label">DEPLOY TIME CUT</div>
+                        <div class="metric-label">Deploy time cut</div>
                     </div>
-                    <div class="report-metric">
+                    <div class="metric">
                         <div class="metric-value">45→10</div>
-                        <div class="metric-label">MINUTES SAVED</div>
+                        <div class="metric-label">Minutes saved per deploy</div>
                     </div>
                 </div>
-                <ul class="report-bullets">
-                    <li>Owned REST APIs (FastAPI + PostgreSQL) end-to-end in an Agile cross-functional team.</li>
-                    <li>Implemented CI/CD pipelines using GitHub Actions.</li>
-                    <li>Optimized database indexing and connection pooling.</li>
+
+                <ul class="experience-bullets">
+                    <li>Owned REST APIs end-to-end (FastAPI + PostgreSQL) within an Agile cross-functional team.</li>
+                    <li>Reduced p95 latency through targeted PostgreSQL indexing and connection pooling.</li>
+                    <li>Cut manual deploy time from 45 to 10 minutes using GitHub Actions CI/CD pipelines.</li>
                 </ul>
             </div>
         </section>
 
-        <!-- STACK SECTION -->
-        <section id="stack" class="section">
-            <h2 class="section-title"><span class="glyph">▣</span> STACK</h2>
+        <!-- ============ STACK ============ -->
+        <section id="stack" class="section" aria-labelledby="stack-title">
+            <header class="section-header">
+                <p class="section-eyebrow">Toolkit</p>
+                <h2 id="stack-title" class="section-title">What I work with</h2>
+            </header>
+
             <div class="stack-grid">
                 <div class="stack-group">
-                    <h4>LANGUAGES</h4>
-                    <div class="tech-chips">
-                        <span class="chip">JavaScript</span>
-                        <span class="chip">TypeScript</span>
-                        <span class="chip">Python</span>
-                        <span class="chip">Java</span>
-                        <span class="chip">C++</span>
-                    </div>
+                    <h3 class="stack-heading">Languages</h3>
+                    <ul class="chip-row"><li class="chip">JavaScript</li><li class="chip">TypeScript</li><li class="chip">Python</li><li class="chip">Java</li><li class="chip">C++</li></ul>
                 </div>
                 <div class="stack-group">
-                    <h4>FRONTEND</h4>
-                    <div class="tech-chips">
-                        <span class="chip">React</span>
-                        <span class="chip">HTML5</span>
-                        <span class="chip">CSS3</span>
-                        <span class="chip">Tailwind</span>
-                    </div>
+                    <h3 class="stack-heading">Frontend</h3>
+                    <ul class="chip-row"><li class="chip">React</li><li class="chip">HTML5</li><li class="chip">CSS3</li><li class="chip">Tailwind</li></ul>
                 </div>
                 <div class="stack-group">
-                    <h4>BACKEND</h4>
-                    <div class="tech-chips">
-                        <span class="chip">Node.js</span>
-                        <span class="chip">Express</span>
-                        <span class="chip">FastAPI</span>
-                        <span class="chip">Spring Boot</span>
-                    </div>
+                    <h3 class="stack-heading">Backend</h3>
+                    <ul class="chip-row"><li class="chip">Node.js</li><li class="chip">Express</li><li class="chip">FastAPI</li><li class="chip">Spring Boot</li></ul>
                 </div>
                 <div class="stack-group">
-                    <h4>DATA</h4>
-                    <div class="tech-chips">
-                        <span class="chip">PostgreSQL</span>
-                        <span class="chip">MongoDB</span>
-                        <span class="chip">Redis</span>
-                        <span class="chip">Pinecone</span>
-                    </div>
+                    <h3 class="stack-heading">Data</h3>
+                    <ul class="chip-row"><li class="chip">PostgreSQL</li><li class="chip">MongoDB</li><li class="chip">Redis</li><li class="chip">Pinecone</li></ul>
                 </div>
                 <div class="stack-group">
-                    <h4>DEVOPS</h4>
-                    <div class="tech-chips">
-                        <span class="chip">Docker</span>
-                        <span class="chip">GitHub Actions</span>
-                        <span class="chip">AWS</span>
-                        <span class="chip">GCP</span>
-                    </div>
+                    <h3 class="stack-heading">DevOps</h3>
+                    <ul class="chip-row"><li class="chip">Docker</li><li class="chip">GitHub Actions</li><li class="chip">AWS</li><li class="chip">GCP</li></ul>
                 </div>
                 <div class="stack-group">
-                    <h4>PRACTICES</h4>
-                    <div class="tech-chips">
-                        <span class="chip" title="Each role sees only the actions it is allowed to perform">RBAC</span>
-                        <span class="chip" title="Secure token-based authentication">JWT</span>
-                        <span class="chip" title="Real-time bidirectional communication">WebSockets</span>
-                        <span class="chip" title="Retrieval-Augmented Generation">RAG</span>
-                    </div>
+                    <h3 class="stack-heading">Practices</h3>
+                    <ul class="chip-row">
+                        <li class="chip" title="Each role sees only the actions it is allowed to perform">RBAC</li>
+                        <li class="chip" title="Stateless, signed authentication tokens">JWT</li>
+                        <li class="chip" title="Bidirectional real-time communication over TCP">WebSockets</li>
+                        <li class="chip" title="Retrieval-Augmented Generation — grounding LLM output in a source corpus">RAG</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <!-- CONTACT SECTION -->
-        <section id="contact" class="section">
-            <h2 class="section-title"><span class="glyph">◇</span> CONTACT</h2>
-            <div class="contact-container">
-                <p>System status: <strong>OPEN_TO_ROLES</strong>. Available for SWE intern and full-time positions.</p>
-                <div class="contact-links">
-                    <a href="mailto:23bit084@sot.pdpu.ac.in" class="btn-primary">SEND EMAIL</a>
-                    <a href="https://github.com/ravalpriyansh779-cpu" target="_blank" rel="noopener" class="btn-secondary">GITHUB</a>
-                    <a href="https://www.linkedin.com/in/priyansh-raval-3a98b7366" target="_blank" rel="noopener" class="btn-secondary">LINKEDIN</a>
-                </div>
-                <div class="sign-off">
-                    hand-coded · zero frameworks · no build step
-                </div>
+        <!-- ============ CONTACT ============ -->
+        <section id="contact" class="section section--contact" aria-labelledby="contact-title">
+            <header class="section-header">
+                <p class="section-eyebrow">Contact</p>
+                <h2 id="contact-title" class="section-title">Let's build something</h2>
+                <p class="section-lead">
+                    Currently open to software engineering intern and full-time roles.
+                    Available immediately — no notice period.
+                </p>
+            </header>
+
+            <div class="contact-grid">
+                <a href="mailto:priyanshraval26@gmail.com" class="contact-card">
+                    <span class="contact-label">Email</span>
+                    <span class="contact-value">priyanshraval26@gmail.com</span>
+                </a>
+                <a href="https://github.com/ravalpriyansh779-cpu" target="_blank" rel="noopener noreferrer" class="contact-card">
+                    <span class="contact-label">GitHub</span>
+                    <span class="contact-value">ravalpriyansh779-cpu</span>
+                </a>
+                <a href="https://www.linkedin.com/in/priyansh-raval-3a98b7366/" target="_blank" rel="noopener noreferrer" class="contact-card">
+                    <span class="contact-label">LinkedIn</span>
+                    <span class="contact-value">priyansh-raval</span>
+                </a>
             </div>
         </section>
+
     </main>
 
-    <!-- Fixed Status Bar -->
-    <footer class="status-bar" aria-label="System Status">
-        <div class="status-segment">NODE: PDEU-07</div>
-        <div class="status-segment">LINK: ENCRYPTED</div>
-        <div class="status-segment">STATUS: OPEN_TO_ROLES</div>
-        <div class="status-segment" id="live-clock">00:00:00</div>
-        <div class="status-segment" id="scroll-progress">SCROLL: 0%</div>
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p class="footer-note">
+                Hand-coded · Zero frameworks · No build step
+            </p>
+            <p class="footer-meta">
+                © <span id="footer-year">2026</span> Priyansh Raval
+            </p>
+        </div>
     </footer>
 
-    <!-- Link to your JavaScript file -->
+    <!-- ============ SCRIPT ============ -->
     <script src="main.js"></script>
 </body>
 </html>
